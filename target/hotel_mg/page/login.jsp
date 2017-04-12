@@ -44,13 +44,6 @@
                     <input type="password" id="p" name="p" class="inputstyle"/>
                 </div>
                 </div>
-<%--
-                 <div class="pwdArea" id="validate">
-                        <label class="input-tips" for="p">验证：</label>
-                        &lt;%&ndash;<div class="inputOuter" id="vArea">
-                            <input type="password" id="v" name="v" class="inputvalidate"/>
-                        </div>&ndash;%&gt;
-                 </div>--%>
                
                 <div style="padding-left:50px;margin-top:20px;"><input type="submit" value="登 录" style="width:150px;" class="button_blue"/></div>
               </form>

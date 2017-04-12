@@ -186,7 +186,6 @@ input::-ms-clear {
 	z-index:3;
 }
 .web_qr_login {
-	height:auto;
 	overflow:hidden;
 }
 
@@ -210,14 +209,12 @@ h1 sup{
     position: absolute;
     margin-left: 10px;}
 .login {border:0;padding:5px 0;
-	height: 350px;
 background: #fff;
 margin: 0 auto;
 -webkit-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .3);
 box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .3);}
 
 .web_login{padding-bottom:20px;
-  height: 250px;
 }
 
 .jianyi{color:#fff;text-align:center;margin-top:25px;color:#B3B8C4;}
@@ -260,7 +257,6 @@ input.button_blue:hover
 }
 a.zcxy {text-decoration: underline;line-height:58px;margin-left:15px;color: #959ca8;}
 .web_login .login_form {margin-top:20px;
-  height: 250px;
 }
 .web_login .uinArea {
 height: 60px;}
