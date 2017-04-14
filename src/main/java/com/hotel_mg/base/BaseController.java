@@ -35,7 +35,7 @@ public class BaseController {
     protected <T> BaseResult<T> success(T t) {
 
         BaseResult<T> res = new BaseResult<T>();
-        res.setSuccess(true);
+        res.setStatus(true);
         res.setMsg("");
         res.setResult(t);
         return res;
@@ -45,7 +45,7 @@ public class BaseController {
 
         BaseResult<T> res = new BaseResult<T>();
         res.setMsg(e.getMessage());
-        res.setSuccess(false);
+        res.setStatus(false);
         return res;
     }
 

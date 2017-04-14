@@ -7,7 +7,7 @@ public class BaseResult<T> {
 
     private T result;
 
-    private boolean success = true;
+    private boolean status = true;
 
     private String msg;
 
@@ -19,17 +19,17 @@ public class BaseResult<T> {
         this.result = result;
     }
 
-    public boolean getSuccess() {
-        return success;
+    public boolean getStatus() {
+        return status;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setStatus(boolean success) {
+        this.status = success;
     }
 
     public String getMsg() {
 
-        if (getSuccess() == true) {
+        if (getStatus() == true) {
             return null;
         }
 

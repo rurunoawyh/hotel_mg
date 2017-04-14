@@ -42,14 +42,14 @@ public class UserDO {
     private Date createDate;
 
     /**
-     * 状态 1 在使用 2 停用 3 删除
+     * 状态 1
      */
     private Integer status;
 
     /**
      * 所属门店
      */
-    private String warehouseId;
+    private String warehouseCode;
 
     /**
      * 随机数
@@ -60,7 +60,7 @@ public class UserDO {
 
     }
 
-    public UserDO(String id, String employeeName, String jobNum, Integer position, String accountNum, String password, Date createDate, Integer status, String warehouseId) {
+    public UserDO(String id, String employeeName, String jobNum, Integer position, String accountNum, String password, Date createDate, Integer status, String warehouseCode) {
         this.id = id;
         this.employeeName = employeeName;
         this.jobNum = jobNum;
@@ -69,7 +69,7 @@ public class UserDO {
         this.password = password;
         this.createDate = createDate;
         this.status = status;
-        this.warehouseId = warehouseId;
+        this.warehouseCode = warehouseCode;
     }
 
     public String getId() {
@@ -136,12 +136,12 @@ public class UserDO {
         this.status = status;
     }
 
-    public String getWarehouseId() {
-        return warehouseId;
+    public String getWarehouseCode() {
+        return warehouseCode;
     }
 
-    public void setWarehouseId(String warehouseId) {
-        this.warehouseId = warehouseId;
+    public void setWarehouseCode(String warehouseCode) {
+        this.warehouseCode = warehouseCode;
     }
 
     public String getSalt() {

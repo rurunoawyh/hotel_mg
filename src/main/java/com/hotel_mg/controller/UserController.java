@@ -37,9 +37,9 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping("register")
-    public @ResponseBody Object register(String employeeName, String jobNum, Integer position, String accountNum, String password, String warehouseId){
+    public @ResponseBody Object register(String employeeName, String jobNum, String accountNum, String password){
         try {
-            if(StringUtils.isEmpty(employeeName)||StringUtils.isEmpty(jobNum)||StringUtils.isEmpty(position)||StringUtils.isEmpty(accountNum)||StringUtils.isEmpty(position)||StringUtils.isEmpty(password)||StringUtils.isEmpty(warehouseId))
+            if(StringUtils.isEmpty(employeeName)||StringUtils.isEmpty(jobNum)||StringUtils.isEmpty(accountNum)||StringUtils.isEmpty(password))
             {
                 return new RuntimeException("必要信息不能为空");
             }
@@ -48,8 +48,6 @@ public class UserController extends BaseController {
             userDO.setEmployeeName(employeeName);
             userDO.setJobNum(jobNum);
             userDO.setPassword(password);
-            userDO.setPosition(position);
-            userDO.setWarehouseId(warehouseId);
             UserDO aDo = userService.register(userDO);
             if (aDo!=null)
                throw new RuntimeException("插入错误");

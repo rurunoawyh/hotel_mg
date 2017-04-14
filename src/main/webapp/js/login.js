@@ -1,5 +1,4 @@
 $(function(){
-	
 	$('#switch_qlogin').click(function(){
 		$('#switch_login').removeClass("switch_btn_focus").addClass('switch_btn');
 		$('#switch_qlogin').removeClass("switch_btn").addClass('switch_btn_focus');
@@ -21,8 +20,7 @@ if(getParam("a")=='0')
 {
 	$('#switch_login').trigger('click');
 }
-
-	});
+});
 	
 function logintab(){
 	scrollTo(0);
@@ -51,38 +49,159 @@ function getParam(pname) {
             } 
         } 
     } 
-}  
-
-
-var reMethod = "GET",
-	pwdmin = 6;
-
+}
 $(document).ready(function() {
+$("#jobNum").change(function(){console.info("0");checkjobNum();});
+$("#accountNum").change(function(){checkAccount();});
+$("#user").change(function(){validateUser();});
+$("#passwd").change(function(){validatePwd()});
+$("#reg").click(function(){regist()});
+//验证
+function validateUser() {
+    if ($('#user').val() == "") {
+        $('#user').focus().css({
+            border: "1px solid red",
+            boxShadow: "0 0 2px red"
+        });
+        $('#userCue').html("<font color='red'><b>×用户名不能为空</b></font>");
+        return false;
+    }
+    if ($('#user').val().length < 4 || $('#user').val().length > 16) {
+
+        $('#user').focus().css({
+            border: "1px solid red",
+            boxShadow: "0 0 2px red"
+        });
+        $('#userCue').html("<font color='red'><b>×用户名位4-16字符</b></font>");
+        return false;
+    }
+    else{
+        $('#userCue').html("");
+        $('#user').focus().css({
+            border: "1px solid black",
+            boxShadow: "0 0 2px black"
+        });
+        return true;
+    }
+}
+//校验工号
+function checkjobNum(){
+    if ($('#jobNum').val() == "") {
+        $('#jobNum').focus().css({
+            border: "1px solid red",
+            boxShadow: "0 0 2px red"
+        });
+        $('#userCue').html("<font color='red'><b>×工号不能为空</b></font>");
+        return false;
+    }
+    if ($('#jobNum').val().length < 8 || $('#jobNum').val().length > 8) {
+
+        $('#jobNum').focus().css({
+            border: "1px solid red",
+            boxShadow: "0 0 2px red"
+        });
+        $('#userCue').html("<font color='red'><b>×工号必须是8位</b></font>");
+        return false;
+
+    }else {
+        $.ajax( {
+            url: "/user/checkAccountNum.json",
+            data:{"jobNum":$("#jobNum").val()},
+            dataType: "json",
+            success: function(data) {
+                if (data.status==false) {
+                    $('#userCue').html("<font color='red'><b>×工号已存在！</b></font>");
+                    return false;
+                }else{
+                $('#userCue').html("");
+                    $('#jobNum').focus().css({
+                        border: "1px solid gray",
+                        boxShadow: "0 0 2px gray"
+                    });
+                return true;
+                }
+            }
+        });
+    }
+}
+//校验账号
+function checkAccount(){
+    if ($('#accountNum').val() == "") {
+        $('#accountNum').focus().css({
+            border: "1px solid red",
+            boxShadow: "0 0 2px red"
+        });
+        $('#userCue').html("<font color='red'><b>×账号不能为空</b></font>");
+        return false;
+    }
+    if ($('#accountNum').val().length < 8 || $('#accountNum').val().length > 14) {
+
+        $('#accountNum').focus().css({
+            border: "1px solid red",
+            boxShadow: "0 0 2px red"
+        });
+        $('#userCue').html("<font color='red'><b>×账号位数8-14</b></font>");
+        return false;
+
+    }else{
+        $.ajax( {
+            url: "/user/checkAccountNum.json",
+            data:{"accountNum":$("#accountNum").val()},
+            dataType: "json",
+            success: function(data) {
+                if (data.status==false) {
+                    $('#userCue').html("<font color='red'><b>×该账号已存在！</b></font>");
+                    return false;
+                }if (data.status==false){
+                    $('#userCue').html("");
+                    $('#accountNum').focus().css({
+                        border: "1px solid gray",
+                        boxShadow: "0 0 2px gray"
+                    });
+                    return true;
+                }
+            }
+        });}
+}
+//验证密码
+function validatePwd(){
+    if ($('#passwd').val().length < 6) {
+        $('#passwd').focus();
+        $('#userCue').html("<font color='red'><b>×密码不能小于" + 6 + "位</b></font>");
+        return false;
+    }else{
+        $('#userCue').html("");
+        return true;}
+}
+//注册
+function regist(){
+    if(validateUser()&&checkjobNum()&&checkAccount()&&validatePwd()){
+        $.ajax( {
+            url: "/user/register.json",
+            data:{"accountNum":$("#accountNum").val()},
+            dataType: "json",
+            success: function(data) {
+                if (data.status==false) {
+                    $('#userCue').html("<font color='red'><b>data.msg</b></font>");
+                }if(data.status==true){
+                    $('#userCue').html("");
+                    alert("注册成功!");
+                }
+            }
+        });
+    }else{
+        $('#userCue').html("");
+        alert("请输入正确的信息");
+    }
+}
+});
+
+/*
+
 
 
 	$('#reg').click(function() {
 
-		if ($('#user').val() == "") {
-			$('#user').focus().css({
-				border: "1px solid red",
-				boxShadow: "0 0 2px red"
-			});
-			$('#userCue').html("<font color='red'><b>×用户名不能为空</b></font>");
-			return false;
-		}
-
-
-
-		if ($('#user').val().length < 4 || $('#user').val().length > 16) {
-
-			$('#user').focus().css({
-				border: "1px solid red",
-				boxShadow: "0 0 2px red"
-			});
-			$('#userCue').html("<font color='red'><b>×用户名位4-16字符</b></font>");
-			return false;
-
-		}
 		$.ajax({
 			type: reMethod,
 			url: "/member/ajaxyz.php",
@@ -107,34 +226,9 @@ $(document).ready(function() {
 		});
 
 
-		if ($('#passwd').val().length < pwdmin) {
-			$('#passwd').focus();
-			$('#userCue').html("<font color='red'><b>×密码不能小于" + pwdmin + "位</b></font>");
-			return false;
-		}
-		if ($('#passwd2').val() != $('#passwd').val()) {
-			$('#passwd2').focus();
-			$('#userCue').html("<font color='red'><b>×两次密码不一致！</b></font>");
-			return false;
-		}
-
-		var sqq = /^[1-9]{1}[0-9]{4,9}$/;
-		if (!sqq.test($('#qq').val()) || $('#qq').val().length < 5 || $('#qq').val().length > 12) {
-			$('#qq').focus().css({
-				border: "1px solid red",
-				boxShadow: "0 0 2px red"
-			});
-			$('#userCue').html("<font color='red'><b>×QQ号码格式不正确</b></font>");return false;
-		} else {
-			$('#qq').css({
-				border: "1px solid #D7D7D7",
-				boxShadow: "none"
-			});
-			
-		}
 
 		$('#regUser').submit();
 	});
-	
 
 });
+*/
