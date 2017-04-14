@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
  * Created by D on 2017/4/9.
  */
 public interface UserDao {
-    Integer saveUserDO(@Param("user") UserDO userDO);
+    Integer saveUserDO(UserDO userDO);
 
     UserDO queryByAccountNumAndJobNum(@Param("accountNum") String accountNum, @Param("jobNum") String jobNum);
 

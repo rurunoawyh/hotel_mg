@@ -31,7 +31,6 @@ public class UserController extends BaseController {
             Boolean aBoolean = userService.checkAccountNum(accountNum, jobNum);
             return success(aBoolean);
         } catch (Exception e) {
-
            return fail(e);
         }
     }
@@ -41,7 +40,7 @@ public class UserController extends BaseController {
         try {
             if(StringUtils.isEmpty(employeeName)||StringUtils.isEmpty(jobNum)||StringUtils.isEmpty(accountNum)||StringUtils.isEmpty(password))
             {
-                return new RuntimeException("必要信息不能为空");
+                throw  new RuntimeException("必要信息不能为空");
             }
             UserDO userDO = new UserDO();
             userDO.setAccountNum(accountNum);
@@ -49,7 +48,7 @@ public class UserController extends BaseController {
             userDO.setJobNum(jobNum);
             userDO.setPassword(password);
             UserDO aDo = userService.register(userDO);
-            if (aDo!=null)
+            if (aDo==null)
                throw new RuntimeException("插入错误");
             return success(aDo);
         } catch (Exception e) {
@@ -61,7 +60,7 @@ public class UserController extends BaseController {
     public @ResponseBody Object login(String accountNum,String password){
         try {
             if(StringUtils.isEmpty(accountNum)||StringUtils.isEmpty(password)){
-                return new RuntimeException("账号或者密码不能为空");
+                throw  new RuntimeException("账号或者密码不能为空");
             }
             UserDO userDO = userService.login(accountNum, password);
             if (userDO!=null)

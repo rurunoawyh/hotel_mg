@@ -19,6 +19,8 @@ public class UserServiceImpl implements UserService{
         MD5Utils.Secret secret = MD5Utils.getSecret(userDO.getPassword());
         userDO.setSalt(secret.getSalt());
         userDO.setPassword(secret.getEncryptionData());
+        String uuid = MD5Utils.getUUID();
+        userDO.setId(uuid);
         //员工账号状态
         userDO.setStatus(1);
         //职位

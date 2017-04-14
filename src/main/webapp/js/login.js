@@ -51,7 +51,7 @@ function getParam(pname) {
     } 
 }
 $(document).ready(function() {
-$("#jobNum").change(function(){console.info("0");checkjobNum();});
+$("#jobNum").change(function(){checkjobNum();});
 $("#accountNum").change(function(){checkAccount();});
 $("#user").change(function(){validateUser();});
 $("#passwd").change(function(){validatePwd()});
@@ -59,7 +59,7 @@ $("#reg").click(function(){regist()});
 //验证
 function validateUser() {
     if ($('#user').val() == "") {
-        $('#user').focus().css({
+        $('#user').css({
             border: "1px solid red",
             boxShadow: "0 0 2px red"
         });
@@ -68,7 +68,7 @@ function validateUser() {
     }
     if ($('#user').val().length < 4 || $('#user').val().length > 16) {
 
-        $('#user').focus().css({
+        $('#user').css({
             border: "1px solid red",
             boxShadow: "0 0 2px red"
         });
@@ -77,9 +77,9 @@ function validateUser() {
     }
     else{
         $('#userCue').html("");
-        $('#user').focus().css({
-            border: "1px solid black",
-            boxShadow: "0 0 2px black"
+        $('#user').css({
+            border: "1px solid gray",
+            boxShadow: "0 0 2px gray"
         });
         return true;
     }
@@ -87,7 +87,7 @@ function validateUser() {
 //校验工号
 function checkjobNum(){
     if ($('#jobNum').val() == "") {
-        $('#jobNum').focus().css({
+        $('#jobNum').css({
             border: "1px solid red",
             boxShadow: "0 0 2px red"
         });
@@ -95,8 +95,7 @@ function checkjobNum(){
         return false;
     }
     if ($('#jobNum').val().length < 8 || $('#jobNum').val().length > 8) {
-
-        $('#jobNum').focus().css({
+        $('#jobNum').css({
             border: "1px solid red",
             boxShadow: "0 0 2px red"
         });
@@ -104,6 +103,7 @@ function checkjobNum(){
         return false;
 
     }else {
+        var flag;
         $.ajax( {
             url: "/user/checkAccountNum.json",
             data:{"jobNum":$("#jobNum").val()},
@@ -111,23 +111,22 @@ function checkjobNum(){
             success: function(data) {
                 if (data.status==false) {
                     $('#userCue').html("<font color='red'><b>×工号已存在！</b></font>");
-                    return false;
-                }else{
+                }if(data.status==true){
                 $('#userCue').html("");
-                    $('#jobNum').focus().css({
+                    $('#jobNum').css({
                         border: "1px solid gray",
                         boxShadow: "0 0 2px gray"
                     });
-                return true;
                 }
             }
         });
+        return flag;
     }
 }
 //校验账号
 function checkAccount(){
     if ($('#accountNum').val() == "") {
-        $('#accountNum').focus().css({
+        $('#accountNum').css({
             border: "1px solid red",
             boxShadow: "0 0 2px red"
         });
@@ -136,7 +135,7 @@ function checkAccount(){
     }
     if ($('#accountNum').val().length < 8 || $('#accountNum').val().length > 14) {
 
-        $('#accountNum').focus().css({
+        $('#accountNum').css({
             border: "1px solid red",
             boxShadow: "0 0 2px red"
         });
@@ -151,14 +150,12 @@ function checkAccount(){
             success: function(data) {
                 if (data.status==false) {
                     $('#userCue').html("<font color='red'><b>×该账号已存在！</b></font>");
-                    return false;
-                }if (data.status==false){
+                }if (data.status==true){
                     $('#userCue').html("");
-                    $('#accountNum').focus().css({
+                    $('#accountNum').css({
                         border: "1px solid gray",
                         boxShadow: "0 0 2px gray"
                     });
-                    return true;
                 }
             }
         });}
@@ -166,26 +163,28 @@ function checkAccount(){
 //验证密码
 function validatePwd(){
     if ($('#passwd').val().length < 6) {
-        $('#passwd').focus();
         $('#userCue').html("<font color='red'><b>×密码不能小于" + 6 + "位</b></font>");
         return false;
     }else{
         $('#userCue').html("");
-        return true;}
+        return true;
+    }
 }
 //注册
 function regist(){
-    if(validateUser()&&checkjobNum()&&checkAccount()&&validatePwd()){
+    if ( $('#userCue').html()!=""||$('#userCue').html()!=null) {
         $.ajax( {
             url: "/user/register.json",
-            data:{"accountNum":$("#accountNum").val()},
+            data:{"accountNum":$("#accountNum").val(),"employeeName":$("#user").val(),"jobNum":$("#jobNum").val(),"password":$("#passwd").val()},
             dataType: "json",
             success: function(data) {
                 if (data.status==false) {
-                    $('#userCue').html("<font color='red'><b>data.msg</b></font>");
+                    var msg = data.msg;
+                    alert(msg);
                 }if(data.status==true){
                     $('#userCue').html("");
                     alert("注册成功!");
+
                 }
             }
         });
@@ -194,6 +193,13 @@ function regist(){
         alert("请输入正确的信息");
     }
 }
+function clearData(){
+    $("#accountNum").val("");
+    $("#user").val("");
+    $("#jobNum").val("");
+    $("#passwd").val("");
+}
+
 });
 
 /*

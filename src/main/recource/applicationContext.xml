@@ -20,9 +20,9 @@
 
      <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- MySQL数据库配置 -->
-		<property name="url" value="jdbc:mysql://58f0342b7183d.sh.cdb.myqcloud.com:7875/hotel_mg?characterEncoding=UTF-8" />
-		<property name="username" value="cdb_outerroot" />
-		<property name="password" value="1234567a" />
+		<property name="url" value="jdbc:mysql://localhost:3306/hotel_mg?characterEncoding=UTF-8" />
+		<property name="username" value="root" />
+		<property name="password" value="123456" />
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 		<!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="1" />
@@ -47,11 +47,8 @@
 	    <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
 	    <property name="typeAliasesPackage" value="com.hotel_mg.entity"></property>
 		<!-- 如果不加入这行配置 需要把Mybatis的映射文件 与 DAO接口放置到相同的目录中 -->
-		<!--<property name="mapperLocations">
-			<list>
-				<value>classpath:com.hotel_mg/dao/impl/*DaoMapper.xml</value>
-			</list>
-		</property>-->
+		<property name="mapperLocations" value="classpath:/mapper/*Dao.xml">
+		</property>
 	</bean>
 
 	<!-- MyBatis会自动通过如下设置 找到DAO接口 -->

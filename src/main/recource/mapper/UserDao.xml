@@ -16,34 +16,34 @@
     <sql id="key">
         <trim suffixOverrides=",">
             <if test="id!=null">
-                #{id},
+                id,
             </if>
             <if test="employeeName!=null">
-                #{employee_name},
+                employee_name,
             </if>
             <if test="jobNum!=null">
-                #{job_num},
+                job_num,
             </if>
             <if test="position!=null">
-                #{position},
+                position,
             </if>
             <if test="accountNum!=null">
-                #{account_num},
+                account_num,
             </if>
             <if test="password!=null">
-                #{password},
+                password,
             </if>
             <if test="createDate!=null">
                 create_date,
             </if>
             <if test="status!=null">
-                #{status},
+                status,
             </if>
             <if test="warehouseCode!=null">
-                #{warehouse_code},
+                warehouse_code,
             </if>
             <if test="salt!=null">
-                #{salt},
+                salt,
             </if>
         </trim>
     </sql>
