@@ -36,7 +36,6 @@ public class BaseController {
 
         BaseResult<T> res = new BaseResult<T>();
         res.setStatus(true);
-        res.setMsg("");
         res.setResult(t);
         return res;
     }
@@ -55,7 +54,6 @@ public class BaseController {
      * @param params
      */
     public void checkParams(Object... params) {
-
         for (Object o : params) {
             if(o==null||o==""){
                 throw  new RuntimeException("必要参数不存在");

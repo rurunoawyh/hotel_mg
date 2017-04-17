@@ -5,7 +5,6 @@ import com.hotel_mg.entity.UserDO;
 import com.hotel_mg.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -38,10 +37,7 @@ public class UserController extends BaseController {
     @RequestMapping("register")
     public @ResponseBody Object register(String employeeName, String jobNum, String accountNum, String password){
         try {
-            if(StringUtils.isEmpty(employeeName)||StringUtils.isEmpty(jobNum)||StringUtils.isEmpty(accountNum)||StringUtils.isEmpty(password))
-            {
-                throw  new RuntimeException("必要信息不能为空");
-            }
+            checkParams(employeeName,jobNum,accountNum,password);
             UserDO userDO = new UserDO();
             userDO.setAccountNum(accountNum);
             userDO.setEmployeeName(employeeName);
@@ -57,15 +53,19 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping("login")
-    public @ResponseBody Object login(String accountNum,String password){
+    public @ResponseBody Object login(String accountNum,String password,String validate){
         try {
-            if(StringUtils.isEmpty(accountNum)||StringUtils.isEmpty(password)){
-                throw  new RuntimeException("账号或者密码不能为空");
-            }
+            checkParams(accountNum,password,validate);
+            Object validationCode = session.getAttribute("validationCode");
+            if(!session.getAttribute("validationCode").equals(validate))
+                throw new RuntimeException("验证码不正确！");
             UserDO userDO = userService.login(accountNum, password);
-            if (userDO!=null)
+            if (userDO==null||userDO.getId()==null) {
+                return new RuntimeException("账号或者密码错误");
+            }else{
+               session.setAttribute("employee",userDO);
                 return success(userDO);
-            return new RuntimeException("账号或者密码错误");
+            }
         } catch (Exception e) {
             return fail(e);
         }

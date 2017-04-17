@@ -56,6 +56,36 @@ $("#accountNum").change(function(){checkAccount();});
 $("#user").change(function(){validateUser();});
 $("#passwd").change(function(){validatePwd()});
 $("#reg").click(function(){regist()});
+$("#login").click(function () {login();});
+function login(){
+    if($('#u').val()==null||$('#u').val()==""){
+        alert("账号不能为空！");
+        return false;
+    }else{
+        if($('#p').val()==""||$('#p').val()==null){
+            alert("密码不能为空");
+            return false;
+        }else{
+            $.ajax({
+                url:"/user/login.json",
+                data:{"accountNum":$('#u').val(),"password":$('#p').val()},
+                dataType:"json",
+                async:false,
+                success:function (data) {
+                    if(data.status==true){
+                        alert("登陆成功");
+                        $('#u').val("");
+                        $('#p').val("");
+                    }else{
+                        alert("登录失败");
+                        $('#u').val("");
+                        $('#p').val("");
+                    }
+                }
+            });
+        }
+    }
+}
 //验证
 function validateUser() {
     if ($('#user').val() == "") {
@@ -184,7 +214,7 @@ function regist(){
                 }if(data.status==true){
                     $('#userCue').html("");
                     alert("注册成功!");
-
+                    clearData();
                 }
             }
         });

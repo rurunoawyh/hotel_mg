@@ -1,116 +1,96 @@
-﻿
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-<title>hotel-manager</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
-<script type="text/javascript" src="../easyui/jquery-1.7.2.js"></script>
-<script type="text/javascript" src="../js/login.js"></script>
-<link href="../css/login2.css" rel="stylesheet" type="text/css" />
+<%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>登录</title>
+    <link rel="stylesheet" href="../css/pintuer.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <script src="../js/jquery.js"></script>
+    <script src="../js/pintuer.js"></script>
+    <script type="text/javascript">
+        $(function(){
+        $("#login").click(function(){login()});
+        function login() {
+            if($('#u').val()==null||$('#u').val()==""){
+               alert("登录账号不能为空！");
+                return false;
+            }else {
+                if ($('#p').val() == "" || $('#p').val() == null) {
+                    alert("登录密码不能为空！");
+                    return false;
+                } else {
+                    if ($('#v').val() == "" || $('#v').val() == null){
+                        alert("验证码不能为空！");
+                        return false;
+                    }else{
+                    $.ajax({
+                        url:"/user/login.json",
+                        data:{"accountNum":$('#u').val(),"password":$('#p').val(),"validate":$('#v').val()},
+                        dataType:"json",
+                        async:false,
+                        success:function (data) {
+                            if(data.status==true){
+                                location.href="/page/index.jsp";
+                                $('#u').val("");
+                                $('#p').val("");
+                            }else{
+                                alert(data.msg);
+                                $('#u').val("");
+                                $('#p').val("");
+                                $('#v').val("");
+                            }
+                        }
+                    });
+                    }
+                }
+            }
+        }
+        });
+    </script>
 </head>
 <body>
-<h1><sup>2017</sup></h1>
-
-<div class="login" style="margin-top:50px;">
-    
-    <div class="header">
-        <div class="switch" id="switch"><a class="switch_btn_focus" id="switch_qlogin" href="javascript:void(0);" tabindex="7">快速登录</a>
-			<a class="switch_btn" id="switch_login" href="javascript:void(0);" tabindex="8">快速注册</a><div class="switch_bottom" id="switch_bottom" style="position: absolute; width: 64px; left: 0px;"></div>
-        </div>
-    </div>    
-  
-    
-    <div class="web_qr_login" id="web_qr_login" style="display: block; height: 235px;">    
-
-            <!--登录-->
-            <div class="web_login" id="web_login">
-               
-               
-               <div class="login-box">
-    
-            
-			<div class="login_form" style="height: 230px;">
-				<form action="" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post"><input type="hidden" name="did" value="0"/>
-               <input type="hidden" name="to" value="log"/>
-                <div class="uinArea" id="uinArea">
-                <label class="input-tips" for="u">帐号：</label>
-                <div class="inputOuter" id="uArea">
-                    <input type="text" id="u" name="accountNum" placeholder="请输入8-14位账号" class="inputstyle"/>
-                </div>
-                </div>
-                <div class="pwdArea" id="pwdArea">
-               <label class="input-tips" for="p">密码：</label>
-               <div class="inputOuter" id="pArea">
-                    
-                    <input type="password" id="p" name="password" placeholder="请输入密码" class="inputstyle"/>
-                </div>
-                </div>
-               
-                <div style="padding-left:50px;margin-top:20px;"><input type="submit" value="登 录" style="width:150px;" class="button_blue"/></div>
-              </form>
-           </div>
-           
-            	</div>
-               
+<div class="bg"></div>
+<div class="container">
+    <div class="line bouncein">
+        <div class="xs6 xm4 xs3-move xm4-move">
+            <div style="height:150px;"></div>
+            <div class="media media-y margin-big-bottom">
             </div>
-            <!--登录end-->
-  </div>
+            <form action="index.jsp" method="post">
+                <div class="panel loginbox">
+                    <div class="text-center margin-big padding-big-top"><h1>Hotel Management</h1></div>
+                    <div class="panel-body" style="padding:30px; padding-bottom:10px; padding-top:10px;">
+                        <div class="form-group">
+                            <div class="field field-icon-right">
+                                <input type="text" id="u" class="input input-big" name="accountNum" placeholder="登录账号" data-validate="required:请填写账号" />
+                                <span class="icon icon-user margin-small" id="umessage"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="field field-icon-right">
+                                <input type="password" id="p" class="input input-big" name="password" placeholder="登录密码" data-validate="required:请填写密码" />
+                                <span class="icon icon-key margin-small" id="pmessage"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="field">
+                                <input type="text" id="v" class="input input-big" name="code" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
+                                <img src="/validate/valid.json" alt="" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" onclick="this.src=this.src+Math.random();">
 
-  <!--注册-->
-    <div class="qlogin" id="qlogin" style="display: none; ">
-   
-    <div class="web_login"><form name="form2" id="regUser" accept-charset="utf-8"  action="" method="post">
-	      <input type="hidden" name="to" value="reg"/>
-		      		       <input type="hidden" name="did" value="0"/>
-        <ul class="reg_form" id="reg-ul">
-        		<div id="userCue" class="cue">快速注册请注意格式</div>
-                <li>
-                	
-                    <label for="user"  class="input-tips2">用户名：</label>
-                    <div class="inputOuter2">
-                        <input type="text" id="user" name="employeeName" maxlength="16" placeholder="请输入用户名" class="inputstyle2"/>
+                            </div>
+                        </div>
                     </div>
-
-                </li>
-            <li>
-                <label for="jobNum" class="input-tips2">工号：</label>
-                <div class="inputOuter2">
-                    <input type="text" id="jobNum" name="jobNum" maxlength="8" placeholder="请输入8位工号" class="inputstyle2" />
+                    <div style="padding:30px;"><input type="button" id="login" class="button button-block bg-main text-big input-big" value="登录"></div>
                 </div>
-
-            </li>
-
-            <li>
-                <label for="accountNum" class="input-tips2">登录账号：</label>
-                <div class="inputOuter2">
-
-                    <input type="text" id="accountNum" name="accountNum" placeholder="请输入8-14位账号" maxlength="10" class="inputstyle2"/>
-                </div>
-
-            </li>
-
-                <li>
-                <label for="passwd" class="input-tips2">密码：</label>
-                    <div class="inputOuter2">
-                        <input type="password" id="passwd"  name="password" placeholder="请输入不少于6密码并牢记" maxlength="16" class="inputstyle2"/>
-                    </div>
-                    
-                </li>
-                
-                <li>
-                    <div class="inputArea">
-                        <input type="button" id="reg"  style="margin-top:10px;margin-left:85px;" class="button_blue" value="同意协议并注册"/> <a href="#" class="zcxy" target="_blank">注册协议</a>
-                    </div>
-                    
-                </li><div class="cl"></div>
-            </ul></form>
-           
-    
+            </form>
+        </div>
     </div>
-   
-    
-    </div>
-    <!--注册end-->
 </div>
-<div class="jianyi">*推荐使用ie8或以上版本ie浏览器或Chrome内核浏览器访问本站</div>
-</body></html>
+
+</body>
+</html>
