@@ -7,6 +7,8 @@ import com.hotel_mg.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * Created by D on 2017/4/10.
  */
@@ -27,6 +29,7 @@ public class UserServiceImpl implements UserService{
         userDO.setPosition(1);
         //所属门店
         userDO.setWarehouseCode("zz_001");
+        userDO.setCreateDate(new Date());
         Integer integer = userDao.saveUserDO(userDO);
         if (integer>0)
             return userDO;
@@ -37,7 +40,7 @@ public class UserServiceImpl implements UserService{
     public UserDO login(String accountNum, String password) {
         UserDO userDO = userDao.queryByAccountNumAndJobNum(accountNum,null);
         if(userDO!=null){
-            if(password==userDO.getPassword())
+            if(password==MD5Utils.getSecret(password).getOriginalData())
                 return userDO;
             return new UserDO();
         }else{
