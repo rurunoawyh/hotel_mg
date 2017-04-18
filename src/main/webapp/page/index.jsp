@@ -21,8 +21,12 @@
 </div>
 <div class="leftnav">
     <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
-    <h2><span class="icon-user"></span>基本设置</h2>
+    <h2><span class="icon-calendar"></span>前台接待</h2>
     <ul style="display:block">
+        <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>实时房态</a></li>
+        <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>预定</a></li>
+        <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>入住</a></li>
+        <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>结算</a></li>
         <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>网站设置</a></li>
         <li><a href="pass.jsp" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
         <li><a href="page.jsp" target="right"><span class="icon-caret-right"></span>单页管理</a></li>
@@ -30,12 +34,35 @@
         <li><a href="book.jsp" target="right"><span class="icon-caret-right"></span>留言管理</a></li>
         <li><a href="column.jsp" target="right"><span class="icon-caret-right"></span>栏目管理</a></li>
     </ul>
-    <h2><span class="icon-pencil-square-o"></span>栏目管理</h2>
-    <ul>
+    <h2><span class="icon-user"></span>客户</h2>
+    <ul style="display:block">
+        <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>散客</a></li>
+        <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>会员</a></li>
+        <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>网站设置</a></li>
+        <li><a href="pass.jsp" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
+        <li><a href="page.jsp" target="right"><span class="icon-caret-right"></span>单页管理</a></li>
+        <li><a href="adv.jsp" target="right"><span class="icon-caret-right"></span>首页轮播</a></li>
+        <li><a href="book.jsp" target="right"><span class="icon-caret-right"></span>留言管理</a></li>
+        <li><a href="column.jsp" target="right"><span class="icon-caret-right"></span>栏目管理</a></li>
+    </ul>
+    <h2><span class="icon-pencil-square-o"></span>基础信息</h2>
+    <ul style="display:block">
+        <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>客房信息</a></li>
+        <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>设备信息</a></li>
+        <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>门店信息</a></li>
+        <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>员工信息</a></li>
+        <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>内容管理</a></li>
         <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>内容管理</a></li>
         <li><a href="add.jsp" target="right"><span class="icon-caret-right"></span>添加内容</a></li>
         <li><a href="cate.jsp" target="right"><span class="icon-caret-right"></span>分类管理</a></li>
     </ul>
+    <h2><span class="icon-table"></span>报表</h2>
+    <ul style="display:block">
+    <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>客房报表</a></li>
+    <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>单据报表</a></li>
+    <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>金额报表</a></li>
+    <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>员工信息</a></li>
+        </ul>
 </div>
 <script type="text/javascript">
     $(function(){
@@ -53,14 +80,13 @@
 <ul class="bread">
     <li><a href="{:U('../Index/info.jsp')}" target="right" class="icon-home"> 首页</a></li>
     <li><a href="##" id="a_leader_txt">网站信息</a></li>
-    <li><b>当前语言：</b><span style="color:red;">中文</php></span>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;切换语言：<a href="##">中文</a> &nbsp;&nbsp;<a href="##">英文</a> </li>
+       <%-- <li><b>当前语言：</b><span style="color:red;">中文</php></span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;切换语言：<a href="##">中文</a> &nbsp;&nbsp;<a href="##">英文</a> </li>--%>
 </ul>
 <div class="admin">
     <iframe scrolling="auto" rameborder="0" src="info.jsp" name="right" width="100%" height="100%"></iframe>
 </div>
 <div style="text-align:center;">
-    <p>来源:<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
 </div>
 </body>
 </html>

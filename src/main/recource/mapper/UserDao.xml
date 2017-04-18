@@ -70,7 +70,7 @@
                 #{password},
             </if>
             <if test="createDate!=null">
-                NOW(),
+                now(),
             </if>
             <if test="status!=null">
                 #{status},
