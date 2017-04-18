@@ -57,12 +57,17 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.6.3" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.6.3" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.12" />
+          <element id="library" level="project" name="patchca-0.5.01" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/patchca/patchca-0.5.0.jar" />
+          <element id="library" level="module" name="Maven: com.alibaba:jconsole:1.8.0" module-name="hotel_mg" />
+          <element id="library" level="module" name="Maven: com.alibaba:tools:1.8.0" module-name="hotel_mg" />
         </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/hotel_mg/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="hotel_mg/web/Web" />
+      <element id="dir-copy" path="$PROJECT_DIR$" />
     </root>
   </artifact>
 </component>

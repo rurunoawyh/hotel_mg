@@ -283,6 +283,20 @@
   </dependencies>
   <build>
     <finalName>hotel_mg</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+          <encoding>UTF-8</encoding>
+          <compilerArguments>
+            <extdirs>D:\Maven\m2\patchca</extdirs>
+          </compilerArguments>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
   <parent>
     <groupId>org.springframework.boot</groupId>

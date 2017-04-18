@@ -29,13 +29,13 @@
                         return false;
                     }else{
                     $.ajax({
-                        url:"/user/login.json",
+                        url:"${pageContext.request.contextPath}/user/login.json",
                         data:{"accountNum":$('#u').val(),"password":$('#p').val(),"validate":$('#v').val()},
                         dataType:"json",
                         async:false,
                         success:function (data) {
                             if(data.status==true){
-                                location.href="/page/index.jsp";
+                                location.href="${pageContext.request.contextPath}/page/index.jsp";
                                 $('#u').val("");
                                 $('#p').val("");
                             }else{
@@ -80,7 +80,7 @@
                         <div class="form-group">
                             <div class="field">
                                 <input type="text" id="v" class="input input-big" name="code" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
-                                <img src="/validate/valid.json" alt="" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" onclick="this.src=this.src+Math.random();">
+                                <img src="${pageContext.request.contextPath}/validate/valid.json" alt="" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" onclick="this.src=this.src+Math.random();">
 
                             </div>
                         </div>

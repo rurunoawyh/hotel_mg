@@ -18,8 +18,6 @@
 
 
        <context:component-scan base-package="com.hotel_mg.controller"></context:component-scan>
-      
-       
        <mvc:annotation-driven>
           <mvc:message-converters>  
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
@@ -54,9 +52,6 @@
        <mvc:resources location="/images/" mapping="/images/**"/> 
        <mvc:resources location="/css/" mapping="/css/**"/> 
        <mvc:resources location="/js/" mapping="/js/**"/>
-       <mvc:resources location="/app/" mapping="/app/**"/>
-       <mvc:resources location="/easyui/" mapping="/easyui/**"/>
        <mvc:resources location="/picture/" mapping="/picture/**"/>
-       <mvc:resources location="/easyui-extend/" mapping="/easyui-extend/**"/>
 
 </beans>

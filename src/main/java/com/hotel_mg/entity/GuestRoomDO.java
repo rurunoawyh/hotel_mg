@@ -47,9 +47,9 @@ public class GuestRoomDO {
     private Date createDate;
 
     /**
-     * 门店id
+     * 门店编码
      */
-    private String warehouseId;
+    private String warehouseCode;
 
     /**
      * 面积
@@ -145,12 +145,12 @@ public class GuestRoomDO {
         this.createDate = createDate;
     }
 
-    public String getWarehouseId() {
-        return warehouseId;
+    public String getWarehouseCode() {
+        return warehouseCode;
     }
 
-    public void setWarehouseId(String warehouseId) {
-        this.warehouseId = warehouseId;
+    public void setWarehouseCode(String warehouseCode) {
+        this.warehouseCode = warehouseCode;
     }
 
     public Double getRoomArea() {
@@ -201,7 +201,7 @@ public class GuestRoomDO {
         this.endDate = endDate;
     }
 
-    public GuestRoomDO(String id, Integer roomType, String roomNum, Integer floorNum, String device, Integer status, Double privice, Date createDate, String warehouseId, Double roomArea, String uint, String photoUrl, String roomDescribe, Date beginDate, Date endDate) {
+    public GuestRoomDO(String id, Integer roomType, String roomNum, Integer floorNum, String device, Integer status, Double privice, Date createDate, String warehouseCode, Double roomArea, String uint, String photoUrl, String roomDescribe, Date beginDate, Date endDate) {
         this.id = id;
         this.roomType = roomType;
         this.roomNum = roomNum;
@@ -210,7 +210,7 @@ public class GuestRoomDO {
         this.status = status;
         this.privice = privice;
         this.createDate = createDate;
-        this.warehouseId = warehouseId;
+        this.warehouseCode = warehouseCode;
         this.roomArea = roomArea;
         this.uint = uint;
         this.photoUrl = photoUrl;

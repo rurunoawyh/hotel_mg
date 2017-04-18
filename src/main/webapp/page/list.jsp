@@ -16,10 +16,10 @@
 <body>
 <form method="post" action="" id="listform">
     <div class="panel admin-panel">
-        <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
+        <div class="panel-head"><strong class="icon-reorder"> 客房信息</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
         <div class="padding border-bottom">
             <ul class="search" style="padding-left:10px;">
-                <li> <a class="button border-main icon-plus-square-o" href="add.jsp"> 添加内容</a> </li>
+                <li> <a class="button border-main icon-plus-square-o" href="add.jsp"> 新增客房</a> </li>
                 <li>搜索：</li>
                 <li>首页
                     <select name="s_ishome" class="input" onchange="changesearch()" style="width:60px; line-height:17px; display:inline-block">
@@ -60,7 +60,7 @@
         </div>
         <table class="table table-hover text-center">
             <tr>
-                <th width="100" style="text-align:left; padding-left:20px;">ID</th>
+                <th width="100" style="text-align:left; padding-left:20px;">序号</th>
                 <th width="10%">排序</th>
                 <th>图片</th>
                 <th>名称</th>
