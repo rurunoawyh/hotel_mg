@@ -7,7 +7,7 @@ public enum RoomTypeEnum {
     /**
      * 房间类型
      */
-    SINGLE(1,"单人间"),DOUBLE(2,"双人"),FAMILY(3,"家庭套房"),DELUXE(4,"豪华套房");
+    SINGLE(1,"单人间"),DOUBLE(2,"双人间"),FAMILY(3,"家庭套房"),DELUXE(4,"豪华套房");
 
     private int index;
 

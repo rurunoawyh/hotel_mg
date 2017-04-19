@@ -119,16 +119,15 @@
         insert into guest_room(<include refid="key" />) values(<include refid="value" />)
     </insert>
 
-    <!--<select id="queryByAccountNumAndJobNum" resultMap="userDOMap">
+    <select id="queryByRoomNum" resultMap="guestRoomDOMap">
         select *
-        from employee
+        from guest_room
         <where>
-        <if test="accountNum !=null and accountNum!='' ">
-            account_num =#{accountNum}
-        </if>
-        <if test="jobNum != null and jobNum != '' ">
-            AND job_num=#{jobNum}
+        <if test="roomNum !=null">
+            room_num =#{roomNum}
         </if>
         </where>
-    </select>-->
+    </select>
+
+
 </mapper>

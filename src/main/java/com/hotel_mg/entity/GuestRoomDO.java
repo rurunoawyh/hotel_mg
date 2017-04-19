@@ -81,6 +81,9 @@ public class GuestRoomDO {
      */
     private Date endDate;
 
+    public GuestRoomDO() {
+    }
+
     public String getId() {
         return id;
     }

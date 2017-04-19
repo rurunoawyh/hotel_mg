@@ -41,6 +41,16 @@ public class WarehouseDO {
      */
     private Integer status;
 
+    /**
+     *评分
+     */
+    private Double score;
+
+    /**
+     * 电话
+     */
+    private String tel;
+
     public String getId() {
         return id;
     }
@@ -95,6 +105,25 @@ public class WarehouseDO {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public WarehouseDO() {
     }
 
     public WarehouseDO(String id, String warehouseName, String warehouseCode, String address, Date createDate, String userId, Integer status) {

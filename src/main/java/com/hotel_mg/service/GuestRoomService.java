@@ -12,4 +12,9 @@ public interface GuestRoomService {
      * @return
      */
    Boolean saveGuestRoomDO(GuestRoomDO guestRoomDO);
+
+    /**
+     * 根据房间号查询客房信息
+     */
+    GuestRoomDO queryByRoomNum(String roomNum);
 }
