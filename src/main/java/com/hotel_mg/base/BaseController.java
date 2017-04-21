@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class BaseController {
 
@@ -65,4 +66,17 @@ public class BaseController {
         sdf.applyPattern(pattern==null?"yyyy-MM-dd":pattern);
         return sdf.parse(beginDate);
     }
+
+    protected String SListToS(List<String> strs){
+        StringBuilder sb = new StringBuilder();
+        if (strs != null && strs.size() > 0) {
+            for (String s : strs) {
+                sb.append(s + ",");  //循环遍历数组中元素，添加到 StringBuilder 对象中
+            }
+        }
+        if (sb.length() > 0)
+            sb.deleteCharAt(sb.length() - 1); //调用 字符串的deleteCharAt() 方法,删除最后一个多余的逗号
+        return sb.toString();
+    }
+
 }

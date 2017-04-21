@@ -21,40 +21,19 @@
             <ul class="search" style="padding-left:10px;">
                 <li> <a class="button border-main icon-plus-square-o" href="add.jsp"> 新增客房</a> </li>
                 <li>搜索：</li>
-                <li>首页
-                    <select name="s_ishome" class="input" onchange="changesearch()" style="width:60px; line-height:17px; display:inline-block">
+                <li>客房类型
+                    <select name="s_ishome" id="roomType"  class="input" onchange="changesearch()" style="width:60px; line-height:17px; display:inline-block">
                         <option value="">选择</option>
-                        <option value="1">是</option>
-                        <option value="0">否</option>
                     </select>
                     &nbsp;&nbsp;
-                    推荐
-                    <select name="s_isvouch" class="input" onchange="changesearch()"  style="width:60px; line-height:17px;display:inline-block">
+                    客房状态
+                    <select name="s_isvouch" id="roomStatus" class="input" onchange="changesearch()"  style="width:60px; line-height:17px;display:inline-block">
                         <option value="">选择</option>
-                        <option value="1">是</option>
-                        <option value="0">否</option>
                     </select>
                     &nbsp;&nbsp;
-                    置顶
-                    <select name="s_istop" class="input" onchange="changesearch()"  style="width:60px; line-height:17px;display:inline-block">
-                        <option value="">选择</option>
-                        <option value="1">是</option>
-                        <option value="0">否</option>
-                    </select>
-                </li>
-                <if condition="$iscid eq 1">
-                    <li>
-                        <select name="cid" class="input" style="width:200px; line-height:17px;" onchange="changesearch()">
-                            <option value="">请选择分类</option>
-                            <option value="">产品分类</option>
-                            <option value="">产品分类</option>
-                            <option value="">产品分类</option>
-                            <option value="">产品分类</option>
-                        </select>
-                    </li>
-                </if>
+
                 <li>
-                    <input type="text" placeholder="请输入搜索关键字" name="keywords" class="input" style="width:250px; line-height:17px;display:inline-block" />
+                        房间号<input type="text" placeholder="请输入房间号" name="keywords" class="input" style="width:250px; line-height:17px;display:inline-block" />
                     <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()" > 搜索</a></li>
             </ul>
         </div>
@@ -175,12 +154,67 @@
                 </tr>
                 <tr>
                     <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
-                </tr></volist>
+                </tr>
+            </volist>
         </table>
     </div>
 </form>
 <script type="text/javascript">
 
+    $(document).ready(function(){
+        queryGuestRoom();
+        //加载查询列表
+        guestRoomType();
+        guestRoomStatus();
+        var GG = {
+            "kk":function(mm){
+                alert(mm);
+            }
+        }
+    });
+    
+    //查询客房基础信息
+    function queryGuestRoom() {
+        $.ajax({
+            url:"${pageContext.request.contextPath}/guestroom/queryGuestRoom.json",
+            data:{},
+            dataType:'json',
+            type:'post',
+            success:function (data) {
+                if(data.status==true){
+                    $("#page").initPage(71,1,GG.kk);
+                }else{
+                    alert("0");
+                }
+            }
+        });
+    }
+    //加载房间类型
+    function guestRoomType(){
+        $.ajax({
+            url:'${pageContext.request.contextPath}/enum/roomTypeEnum.json',
+            dataType:'json',
+            type:'post',
+            success:function (data) {
+                for (var opt=0; opt<data.length;opt++){
+                    $('#roomType').append("<option value='"+data[opt].key+"'>"+data[opt].value+"</option>");
+                }
+            }
+        });
+    }
+    //加载房间状态
+    function guestRoomStatus(){
+        $.ajax({
+            url:'${pageContext.request.contextPath}/enum/roomStatusEnum.json',
+            dataType:'json',
+            type:'post',
+            success:function (data) {
+                for (var opt=0; opt<data.length;opt++){
+                    $('#roomStatus').append("<option value='"+data[opt].key+"'>"+data[opt].value+"</option>");
+                }
+            }
+        });
+    }
     //搜索
     function changesearch(){
 

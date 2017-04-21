@@ -1,12 +1,15 @@
 package com.hotel_mg.service.impl;
 
+import com.hotel_mg.base.PageResult;
 import com.hotel_mg.dao.GuestRoomDao;
 import com.hotel_mg.entity.GuestRoomDO;
+import com.hotel_mg.query.GuestRoomQuery;
 import com.hotel_mg.service.GuestRoomService;
 import com.hotel_mg.util.MD5Utils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -28,7 +31,6 @@ public class GuestRoomServiceImpl implements GuestRoomService {
         guestRoomDO.setBeginDate(new Date());
         //大小单位
         guestRoomDO.setUint("㎡");
-        guestRoomDO.setPhotoUrl("");
         Integer integer = guestRoomDao.saveGuestRoomDO(guestRoomDO);
         if (integer!=null||integer==0)
             return false;
@@ -38,5 +40,15 @@ public class GuestRoomServiceImpl implements GuestRoomService {
     @Override
     public GuestRoomDO queryByRoomNum(String roomNum) {
         return guestRoomDao.queryByRoomNum(roomNum);
+    }
+
+    @Override
+    public PageResult<GuestRoomDO> query(GuestRoomQuery guestRoomQuery) {
+        PageResult<GuestRoomDO> guestRoomDOPageResult = new PageResult<>();
+        guestRoomDOPageResult.setIndex(guestRoomDOPageResult.getIndex());
+        guestRoomDOPageResult.setList(new ArrayList<GuestRoomDO>());
+        guestRoomDOPageResult.setTotalNum(0);
+        guestRoomDOPageResult.setNum(guestRoomQuery.getNum());
+        return null;
     }
 }

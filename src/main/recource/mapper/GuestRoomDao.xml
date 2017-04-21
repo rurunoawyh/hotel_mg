@@ -13,7 +13,6 @@
         <result property="warehouseCode" column="warehouse_code" />
         <result property="roomArea" column="room_area" />
         <result property="uint" column="uint" />
-        <result property="photoUrl" column="photo_url" />
         <result property="roomDescribe" column="room_describe" />
         <result property="beginDate" column="begin_date" />
         <result property="endDate" column="end_date" />
@@ -52,9 +51,6 @@
             </if>
             <if test="uint!=null">
                 uint,
-            </if>
-            <if test="photoUrl!=null">
-                photo_url,
             </if>
             <if test="roomDescribe!=null">
                 room_describe,
@@ -100,10 +96,7 @@
             </if>
             <if test="uint!=null">
                 #{uint},
-            </if>
-            <if test="photoUrl!=null">
-                #{photoUrl},
-            </if>
+            </if>o
             <if test="roomDescribe!=null">
                 #{roomDescribe},
             </if>
@@ -128,6 +121,8 @@
         </if>
         </where>
     </select>
+
+    <select id=""></select>
 
 
 </mapper>

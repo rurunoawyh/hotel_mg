@@ -32,7 +32,7 @@ public class GuestRoomDO {
     private String device;
 
     /**
-     * 状态 1.空闲  2预定 3.占用 4等待
+     * 状态 1.空闲  2.占用 3等待
      */
     private Integer status;
 
@@ -60,11 +60,6 @@ public class GuestRoomDO {
      * 单位
      */
     private String  uint;
-
-    /**
-     * 照片地址
-     */
-    private String photoUrl;
 
     /**
      * 描述
@@ -172,14 +167,6 @@ public class GuestRoomDO {
         this.uint = uint;
     }
 
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
     public String getRoomDescribe() {
         return roomDescribe;
     }
@@ -204,7 +191,7 @@ public class GuestRoomDO {
         this.endDate = endDate;
     }
 
-    public GuestRoomDO(String id, Integer roomType, String roomNum, Integer floorNum, String device, Integer status, Double privice, Date createDate, String warehouseCode, Double roomArea, String uint, String photoUrl, String roomDescribe, Date beginDate, Date endDate) {
+    public GuestRoomDO(String id, Integer roomType, String roomNum, Integer floorNum, String device, Integer status, Double privice, Date createDate, String warehouseCode, Double roomArea, String uint, String roomDescribe, Date beginDate, Date endDate) {
         this.id = id;
         this.roomType = roomType;
         this.roomNum = roomNum;
@@ -216,7 +203,6 @@ public class GuestRoomDO {
         this.warehouseCode = warehouseCode;
         this.roomArea = roomArea;
         this.uint = uint;
-        this.photoUrl = photoUrl;
         this.roomDescribe = roomDescribe;
         this.beginDate = beginDate;
         this.endDate = endDate;

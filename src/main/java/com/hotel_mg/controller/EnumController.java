@@ -2,6 +2,7 @@ package com.hotel_mg.controller;
 
 import com.hotel_mg.ViewObject.IdName;
 import com.hotel_mg.base.BaseController;
+import com.hotel_mg.enums.RoomStatusEnum;
 import com.hotel_mg.enums.RoomTypeEnum;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,20 @@ public class EnumController extends BaseController{
             idName.setKey(e.getIndex());
             idName.setValue(e.getDesc());
             list.add(idName);
+        }
+        return list;
+    }
+
+    //房间状态
+    @RequestMapping("roomStatusEnum")
+    public @ResponseBody List<IdName> RoomStatusEnum(){
+        List<IdName> list = new ArrayList<>();
+        for (RoomStatusEnum e : RoomStatusEnum.values()) {
+            if(e.getIndex()!=-1){
+            IdName idName = new IdName();
+            idName.setKey(e.getIndex());
+            idName.setValue(e.getDesc());
+            list.add(idName);}
         }
         return list;
     }

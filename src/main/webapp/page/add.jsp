@@ -12,7 +12,7 @@
           <label>房间号：</label>
         </div>
         <div class="field">
-          <input id="roomNum" type="text" class="input w50" value="" name="roomNum" data-validate="required:请输入房间号" />
+          <input id="roomNum" type="text" class="input w50" value="" name="roomNum" <%--data-validate="required:请输入房间号"--%> />
           <div class="tips"></div>
         </div>
       </div>
@@ -36,11 +36,12 @@
         <div class="field" style="padding-top:8px;">
           1 <input name="floorNum" value="1"  type="radio" />
           2 <input name="floorNum" value="2"  type="radio" />
-          4 <input name="floorNum" value="3"  type="radio" />
-          5 <input name="floorNum" value="4"  type="radio" />
-          6 <input name="floorNum" value="5"  type="radio" />
-          7 <input name="floorNum" value="6"  type="radio" />
-          8 <input name="floorNum" value="7"  type="radio" />
+          3 <input name="floorNum" value="3"  type="radio" />
+          4 <input name="floorNum" value="4"  type="radio" />
+          5 <input name="floorNum" value="5"  type="radio" />
+          6 <input name="floorNum" value="6"  type="radio" />
+          7 <input name="floorNum" value="7"  type="radio" />
+          8 <input name="floorNum" value="8"  type="radio" />
         </div>
       </div>
 
@@ -49,7 +50,7 @@
           <label>价格：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" value="" name="privice" data-validate="required:请输入价格" />
+          <input type="text" class="input w50" value="" id="price" name="privice"/>
           <div class="tips"></div>
         </div>
       </div>
@@ -71,12 +72,12 @@
           <label>面积：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" value="" name="roomArea" data-validate="required:请输入单位为㎡" /><span id="uint"></span>
+          <input type="text" class="input w50" value="" id="roomArea" name="roomArea" plachholder="单位为㎡" /><span id="uint"></span>
           <div class="tips"></div>
         </div>
       </div>
 
-      <div class="form-group">
+     <%-- <div class="form-group">
         <div class="label">
           <label>实体图片：</label>
         </div>
@@ -85,20 +86,20 @@
           <input type="button" class="button bg-blue margin-left" id="image2" value="+ 浏览上传"  style="float:left;">
           <div class="tipss">图片尺寸：500*500</div>
         </div>
-      </div>
+      </div>--%>
 
       <div class="form-group">
         <div class="label">
           <label>设备：</label>
         </div>
         <div class="field" style="padding-top:8px;">
-          <span>有窗</span> <input   type="checkbox" />
-          <span>大床(1.5m)</span> <input   type="checkbox" />
-          <span>双床</span> <input   type="checkbox" />
-          <span>无线</span> <input   type="checkbox" />
-          <span>浴室</span> <input   type="checkbox" />
-          <span>液晶电视</span> <input   type="checkbox" />
-          <span>零食</span> <input   type="checkbox" />
+          <span>有窗</span> <input  name="roomDevice" value="1" type="checkbox" />
+          <span>大床(1.5m)</span> <input name="roomDevice" value="2"  type="checkbox" />
+          <span>双床</span> <input  name="roomDevice" value="3" type="checkbox" />
+          <span>无线</span> <input  name="roomDevice" value="4" type="checkbox" />
+          <span>浴室</span> <input  name="roomDevice" value="5" type="checkbox" />
+          <span>液晶电视</span> <input  name="roomDevice" value="6" type="checkbox" />
+          <span>零食</span> <input  name="roomDevice"  value="7" type="checkbox" />
         </div>
       </div>
 
@@ -107,7 +108,7 @@
           <label>描述：</label>
         </div>
         <div class="field">
-          <textarea class="input" name="roomDescribe" style=" height:90px;"></textarea>
+          <textarea class="input" id="roomDescribe" name="roomDescribe" style=" height:90px;"></textarea>
           <div class="tips"></div>
         </div>
       </div>
@@ -117,9 +118,9 @@
           <label></label>
         </div>
         <div class="field">
-          <button class="button bg-main icon-check-square-o" type="button"> 提交</button>
-          <button class="button bg-main icon-ban-circle" type="button"> 重置</button>
-          <button class="button bg-main icon-reply" type="button"> 返回</button>
+          <button class="button bg-main icon-check-square-o" id="submit" type="button"> 提交</button>
+          <button class="button bg-main icon-ban-circle" id="reset" type="button"> 重置</button>
+          <button class="button bg-main icon-reply" id="return" type="button"> 返回</button>
         </div>
       </div>
     </form>
@@ -128,27 +129,51 @@
 <script type="text/javascript">
     $(function(){
         //检查房间号
-        $("#roomNum").blur(function(){checkRoomNum()});
+        $("#roomNum").blur(function(){checkRoomNum(this)});
         //初始化房间类型
         initRoomType();
+        $('#roomTypeSelect').change(function () {selectVal("请选择房间类型")});
         //选择门店
         initWarehouse();
-        //检查房间类型
-        function checkRoomNum(){
+        $('#warehouse').change(function () {selectVal1("请选择门店")});
+        //验证price
+        $('#price').blur(function(){ validatePrice(this)});
+        //验证面积
+        $('#roomArea').blur(function () { validateArea(this)});
+        //验证描述
+        $('#roomDescribe').blur(function () {validateDescribe(this) });
+        //重置
+        $("#reset").click(function () {resetVal()});
+        //返回
+        $("#return").click(function () { location.href="list.jsp"});
+        //发送请求
+        $("#submit").click(function () {submit()});
+
+
+        function checkRoomNum(obj){
+            if($('#roomNum').val()==''||$('#roomNum').val()==null){
+                addValidate(obj,"请输入房间号");
+                $('#roomNum').focus();
+                return false;
+            }else{
+                removeValidate(obj,"");
+                return true;
+            }
+            /*
             $.ajax({
-                url:"${pageContext.request.contextPath}/guestroom/checkRoomNum.json",
+
                 data:{"roomNum":$('#roomNum').val()},
                 dateType:"json",
                 success:function(data){
                     if(data.status==true){
-                        return true;
+                        removeValidate(obj,"");
                     }if (data.status==false){
-                        alertMsg(data.msg);
-                        return false;
+                        addValidate(obj,"该房间号已经存在!");
+                        $('#roomNum').focus();
                     }
 
                 }
-            });
+            });*/
         }
 
         function initRoomType() {
@@ -176,6 +201,165 @@
                     }
                 }
             });
+        }
+
+        function validatePrice(obj){
+            if($('#price').val()==''||$('#price').val()==null){
+                addValidate(obj,"请输入价格!");
+                $('#price').focus();
+                return false;
+            }
+            if (isNaN($('#price').val())){
+               addValidate(obj,"请输入数字!");
+               $('#price').focus();
+               return false;
+            }else{
+                removeValidate(obj,"");
+                return true;
+            }
+        }
+
+        function validateArea(obj) {
+            if($('#roomArea').val()==''||$('#roomArea').val()==null){
+                addValidate(obj,"请输入房间大小!");
+                $('#roomArea').focus();
+                return false;
+            }
+            if (isNaN($('#roomArea').val())){
+                addValidate(obj,"请输入数字!");
+                $('#roomArea').focus();
+                return false;
+            }else{
+                removeValidate(obj,"");
+                return true;
+            }
+        }
+
+        function validateDescribe(obj) {
+            if($('#roomDescribe').val()==''||$('#roomDescribe').val()==null){
+                addValidate(obj,"请填写描述");
+                $('#roomDescribe').focus();
+                return false;
+            }else{
+                removeValidate(obj,"");
+                return true;
+            }
+        }
+        //验证下拉框是否有值
+        function selectVal(msg){
+            if($('#roomTypeSelect').children('option:selected').val()==''||$('#roomTypeSelect').children('option:selected').val()==null){
+                removeValidate($('#roomTypeSelect'),"");
+                addValidate($('#roomTypeSelect'),msg);
+                return false;
+            }else{
+                removeValidate($('#roomTypeSelect'),"");
+                return true;
+            }
+        }
+        function selectVal1(msg){
+            if($('#warehouse').children('option:selected').val()==''||$('#warehouse').children('option:selected').val()==null){
+                removeValidate($('#warehouse'),"");
+                addValidate($('#warehouse'),msg);
+                return false;
+            }else{
+                removeValidate($('#warehouse'),"");
+                return true;
+            }
+        }
+
+        //验证radio是否有值
+        function radioVal(){
+            var val=$('input:radio[name="floorNum"]:checked').val();
+            if(val==null||val==''){
+                alertMsg("请选择楼层");
+                return false;
+            }else{
+                return true;
+            }
+        }
+
+        //重置
+        function resetVal(){
+            $('#roomNum').val('');
+            $("#roomTypeSelect option[value='']").attr("selected", "selected");
+            $("input[type='radio']").removeAttr('checked');
+            $("#price").val('');
+            $("#warehouse option[value='']").attr("selected","selected");
+            $("#roomArea").val('');
+            $("input[type='checkbox']").each(function(){this.checked=false;});
+            $("#roomDescribe").val('');
+        }
+
+        //提交
+        function submit(){
+            //验证房间类型
+            var a =checkRoomNum($('#roomNum'));
+            var b = selectVal("请选择房间类型");
+            var c =radioVal();
+            var d =validatePrice($('#price'));
+            var e =validateArea($('#roomArea'));
+            var f =selectVal1("请选择门店");
+            var g =validateDescribe($('#roomDescribe'));
+            console.info(a,b,c,d,e,f,g);
+            if(a&&b&&c&&e&&f&&g&&d){
+                saveRoom();
+            }
+        }
+
+        function saveRoom(){
+            var roomDevices="";
+            $("input[name='roomDevice']:checkbox").each(function(){
+                if (true == $(this).attr("checked")) {
+                    roomDevices +="roomDevice"+":"+ $(this).attr('value')+',';
+                }});
+            $.ajax({
+                url:"${pageContext.request.contextPath}/guestroom/save.json",
+                type: "post",
+                data: $("form").serialize(),
+                dataType:"json",
+                traditional:true,
+                success:function (data) {
+                         if(data.status==true){
+                             alertSuccess("添加成功");
+                             location.href="list.jsp";
+                         }if(data.status==false){
+                            alertError(data.msg);
+                         }
+                }
+            });
+        }
+
+        //警告弹框
+        function alertMsg(data){
+            var txt=  data;
+            window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+        }
+
+        //成功弹框
+        function alertSuccess(data) {
+            var txt=  data;
+            window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+        }
+
+        function alertError(data) {
+            var txt=  data;
+            window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+        }
+
+        function addValidate(obj,msg){
+            var e = $(obj);
+            e.closest('.field').children(".input-help").remove();
+            e.closest('.form-group').removeClass("check-success");
+            e.closest('.form-group').addClass("check-error");
+            e.closest('.field').append('<div class="input-help"><ul>'+msg+'</ul></div>');
+        }
+
+        function removeValidate(obj,msg){
+            var e = $(obj);
+            e.closest('.field').children(".input-help").remove();
+            e.closest('.form-group').removeClass("check-error");
+            e.closest('.form-group').addClass("check-success");
+            e.closest('.field').append('<div class="input-help"><ul>'+msg+'</ul></div>');
         }
     });
 
