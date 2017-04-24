@@ -22,18 +22,18 @@
                 <li> <a class="button border-main icon-plus-square-o" href="add.jsp"> 新增客房</a> </li>
                 <li>搜索：</li>
                 <li>客房类型
-                    <select name="s_ishome" id="roomType"  class="input" onchange="changesearch()" style="width:60px; line-height:17px; display:inline-block">
+                    <select name="roomType" id="roomType"  class="input" onchange="changesearch()" style="width:60px; line-height:17px; display:inline-block">
                         <option value="">选择</option>
                     </select>
                     &nbsp;&nbsp;
                     客房状态
-                    <select name="s_isvouch" id="roomStatus" class="input" onchange="changesearch()"  style="width:60px; line-height:17px;display:inline-block">
+                    <select name="roomStatus" id="roomStatus" class="input" onchange="changesearch()"  style="width:60px; line-height:17px;display:inline-block">
                         <option value="">选择</option>
                     </select>
                     &nbsp;&nbsp;
 
                 <li>
-                        房间号<input type="text" placeholder="请输入房间号" name="keywords" class="input" style="width:250px; line-height:17px;display:inline-block" />
+                        房间号<input type="text" placeholder="请输入房间号" name="roomNum" class="input" style="width:250px; line-height:17px;display:inline-block" />
                     <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()" > 搜索</a></li>
             </ul>
         </div>
@@ -174,10 +174,16 @@
     });
     
     //查询客房基础信息
-    function queryGuestRoom() {
+    function queryGuestRoom(mm) {
+        var index;
+        if(mm==""||mm==0||mm==null||mm==undefined){
+            index = 0;
+        }else{
+            index =mm;
+        }
         $.ajax({
             url:"${pageContext.request.contextPath}/guestroom/queryGuestRoom.json",
-            data:{},
+            data:{"index":index,"roomType":$('#roomType').children('option:selected').val(),"roomStatus":$('#roomstatus').children('option:selected').val(),"roomNum":$('#roomNum').val()},
             dataType:'json',
             type:'post',
             success:function (data) {

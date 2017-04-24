@@ -1,5 +1,6 @@
 package com.hotel_mg.service;
 
+import com.hotel_mg.ViewObject.GuestRoomVO;
 import com.hotel_mg.base.PageResult;
 import com.hotel_mg.entity.GuestRoomDO;
 import com.hotel_mg.query.GuestRoomQuery;
@@ -20,5 +21,5 @@ public interface GuestRoomService {
      */
     GuestRoomDO queryByRoomNum(String roomNum);
 
-    PageResult<GuestRoomDO> query(GuestRoomQuery guestRoomQuery);
+    PageResult<GuestRoomVO> query(GuestRoomQuery guestRoomQuery) throws Exception;
 }

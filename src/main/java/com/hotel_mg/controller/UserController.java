@@ -61,7 +61,7 @@ public class UserController extends BaseController {
                 throw new RuntimeException("验证码不正确！");
             UserDO userDO = userService.login(accountNum, password);
             if (userDO==null||userDO.getId()==null) {
-                return new RuntimeException("账号或者密码错误");
+                throw  new RuntimeException("账号或者密码错误");
             }else{
                session.setAttribute("employee",userDO);
                 return success(userDO);

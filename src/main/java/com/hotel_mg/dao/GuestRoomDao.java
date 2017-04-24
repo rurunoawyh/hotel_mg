@@ -1,6 +1,7 @@
 package com.hotel_mg.dao;
 
 import com.hotel_mg.entity.GuestRoomDO;
+import com.hotel_mg.query.GuestRoomQuery;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -12,5 +13,7 @@ public interface GuestRoomDao {
 
     GuestRoomDO queryByRoomNum(@Param("roomNum") String roomNum);
 
-    List<GuestRoomDO> queryByQuery();
+    List<GuestRoomDO> queryByQuery(GuestRoomQuery guestRoomQuery);
+
+    Integer count(GuestRoomQuery guestRoomQuery);
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hotel_mg.dao.WarehouseDao">
-    <resultMap id="gWarehouseDOMap" type="WarehouseDO">
+    <resultMap id="warehouseDOMap" type="WarehouseDO">
         <id property="id" column="id" />
         <result property="warehouseName" column="warehouse_name" />
         <result property="warehouseCode" column="warehouse_code" />
@@ -13,11 +13,21 @@
         <result property="tel" column="tel" />
     </resultMap>
 
-    <select id="queryByName" resultMap="gWarehouseDOMap">
+    <select id="queryByName" resultMap="warehouseDOMap">
         select *
         from warehouse
         <where>
             <if test="warehouseName != null ">warehouse_name like  CONCAT('%', '${warehouseName}', '%')</if>
         </where>
+    </select>
+
+    <select id="queryByCodes" resultMap="warehouseDOMap" >
+        select *
+        from warehouse
+        where warehouse_code in
+        <foreach collection="codes" item="warehouse_code" open="(" close=")"
+                 separator=",">
+            #{code}
+        </foreach>
     </select>
 </mapper>

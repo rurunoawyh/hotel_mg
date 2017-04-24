@@ -53,13 +53,19 @@ public class GuestRoomController extends BaseController{
     @RequestMapping("/queryGuestRoom")
     public @ResponseBody Object queryGuestRoom(@Param("index")Integer index,@Param("desc")Object desc,
                                                @Param("roomType")Integer roomType,@Param("status")Integer status,@Param("roomNum")String roomNum){
-       checkParams(index);
+
+       try {
+        checkParams(index);
         GuestRoomQuery guestRoomQuery = new GuestRoomQuery();
         guestRoomQuery.setIndex(index);
         guestRoomQuery.setRoomType(roomType);
         guestRoomQuery.setRoomNum(roomNum);
         guestRoomQuery.setStatus(status);
-        return null;
+        //guestRoomQuery.setOrder("create_date");
+             return success(guestRoomService.query(guestRoomQuery));
+        } catch (Exception e) {
+            return fail(e);
+        }
     }
 
     @RequestMapping("/checkRoomNum")
