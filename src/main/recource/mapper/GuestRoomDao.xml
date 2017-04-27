@@ -96,7 +96,7 @@
             </if>
             <if test="uint!=null">
                 #{uint},
-            </if>o
+            </if>
             <if test="roomDescribe!=null">
                 #{roomDescribe},
             </if>
@@ -110,7 +110,6 @@
     </sql>
 
     <sql id="doGuestRoomQueryParams">
-
            <if test="roomType!=null">
             and room_type= #{roomType},
            </if>
@@ -139,15 +138,13 @@
         select *
         from guest_room
         <where>
-         index = #{index}
         <include refid="doGuestRoomQueryParams"></include>
         </where>
-         order by create_date desc limit #{begin},#{num}
+         order by ${order} desc limit #{begin},#{num}
     </select>
 
-    <select id="count"  parameterType="com.hotel_mg.query.GuestRoomQuery">
-        select *
-        from guest_room
+    <select id="count"  resultType="java.lang.Integer" parameterType="com.hotel_mg.query.GuestRoomQuery">
+        select count(1)        from guest_room
         <where> <include refid="doGuestRoomQueryParams"></include> </where>
     </select>
 

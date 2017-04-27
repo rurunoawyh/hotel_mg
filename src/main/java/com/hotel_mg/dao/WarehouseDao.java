@@ -11,5 +11,5 @@ import java.util.List;
 public interface WarehouseDao {
     List<WarehouseDO> queryByName(@Param("warehouseName")String warehouseName);
 
-    List<WarehouseDO> queryByCodes(@Param("codes") List<String> codes);
+    List<WarehouseDO> queryByCodes(List<String> codes);
 }

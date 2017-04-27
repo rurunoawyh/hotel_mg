@@ -50,11 +50,18 @@ var  page = {
         currentPage = parseInt(currentPage);
         page.initWithUl(listCount,currentPage);
         page.initPageEvent(listCount,fun);
+        //fun(currentPage);
+    },
+    "setPageCount":function(listCount,currentPage,fun){
+        listCount = parseInt(listCount);
+        currentPage = parseInt(currentPage);
+        page.initWithUl(listCount,currentPage);
+        page.initPageEvent(listCount,fun);
         fun(currentPage);
     },
     "initPageEvent":function(listCount,fun){
         $("#"+page.pageId +">li[class='pageItem']").on("click",function(){
-            page.setPageListCount(listCount,$(this).attr("page-data"),fun);
+            page.setPageCount(listCount,$(this).attr("page-data"),fun);
         });
     },
     "getPageListModel":function(pageCount,currentPage){

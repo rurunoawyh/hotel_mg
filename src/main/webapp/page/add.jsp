@@ -321,7 +321,7 @@
                 success:function (data) {
                          if(data.status==true){
                              alertSuccess("添加成功");
-                             location.href="list.jsp";
+                             location.href="guestRoom.jsp";
                          }if(data.status==false){
                             alertError(data.msg);
                          }

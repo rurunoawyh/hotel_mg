@@ -61,7 +61,7 @@ public class GuestRoomController extends BaseController{
         guestRoomQuery.setRoomType(roomType);
         guestRoomQuery.setRoomNum(roomNum);
         guestRoomQuery.setStatus(status);
-        //guestRoomQuery.setOrder("create_date");
+        guestRoomQuery.setOrder("create_date");
              return success(guestRoomService.query(guestRoomQuery));
         } catch (Exception e) {
             return fail(e);

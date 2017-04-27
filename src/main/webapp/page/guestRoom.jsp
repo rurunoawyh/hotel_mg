@@ -1,19 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="renderer" content="webkit">
-    <title></title>
-    <link rel="stylesheet" href="../css/pintuer.css">
-    <link rel="stylesheet" href="../css/admin.css">
-    <script src="../js/jquery.js"></script>
-    <script src="../js/pintuer.js"></script>
-</head>
-<body>
+<jsp:include page="head.jsp"></jsp:include>
 <form method="post" action="" id="listform">
     <div class="panel admin-panel">
         <div class="panel-head"><strong class="icon-reorder"> 客房信息</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
@@ -22,7 +9,7 @@
                 <li> <a class="button border-main icon-plus-square-o" href="add.jsp"> 新增客房</a> </li>
                 <li>搜索：</li>
                 <li>客房类型
-                    <select name="roomType" id="roomType"  class="input" onchange="changesearch()" style="width:60px; line-height:17px; display:inline-block">
+                    <select name="roomType" id="roomType"  class="input" onchange="changesearch()" style="width:90px; line-height:17px; display:inline-block">
                         <option value="">选择</option>
                     </select>
                     &nbsp;&nbsp;
@@ -38,124 +25,27 @@
             </ul>
         </div>
         <table class="table table-hover text-center">
-            <tr>
+          <tr>
                 <th width="100" style="text-align:left; padding-left:20px;">序号</th>
-                <th width="10%">排序</th>
-                <th>图片</th>
-                <th>名称</th>
-                <th>属性</th>
-                <th>分类名称</th>
-                <th width="10%">更新时间</th>
+                <th>房号</th>
+                <th>房类型</th>
+                <th>楼层</th>
+                <th>设备</th>
+                <th>价格</th>
+                <th>门店</th>
+                <th>面积</th>
+                <th>描述</th>
+                <th>状态</th>
+                <th width="10%">创建时间</th>
                 <th width="310">操作</th>
             </tr>
-            <volist name="list" id="vo">
-                <tr>
-                    <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-                        1</td>
-                    <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-                    <td width="10%"><img src="../images/11.jpg" alt="" width="70" height="50" /></td>
-                    <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-                    <td><font color="#00CC99">首页</font></td>
-                    <td>产品分类</td>
-                    <td>2016-07-01</td>
-                    <td><div class="button-group"> <a class="button border-main" href="add.jsp"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-                </tr>
-                <tr>
-                    <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-                        1</td>
-                    <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-                    <td width="10%"><img src="../images/11.jpg" alt="" width="70" height="50" /></td>
-                    <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-                    <td><font color="#00CC99">首页</font></td>
-                    <td>产品分类</td>
-                    <td>2016-07-01</td>
-                    <td><div class="button-group"> <a class="button border-main" href="add.jsp"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-                </tr>
-                <tr>
-                    <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-                        1</td>
-                    <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-                    <td width="10%"><img src="../images/11.jpg" alt="" width="70" height="50" /></td>
-                    <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-                    <td><font color="#00CC99">首页</font></td>
-                    <td>产品分类</td>
-                    <td>2016-07-01</td>
-                    <td><div class="button-group"> <a class="button border-main" href="add.jsp"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-                </tr>
-                <tr>
-                    <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-                        1</td>
-                    <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-                    <td width="10%"><img src="../images/11.jpg" alt="" width="70" height="50" /></td>
-                    <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-                    <td><font color="#00CC99">首页</font></td>
-                    <td>产品分类</td>
-                    <td>2016-07-01</td>
-                    <td><div class="button-group"> <a class="button border-main" href="add.jsp"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-                </tr>
-                <tr>
-                    <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-                        1</td>
-                    <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-                    <td width="10%"><img src="../images/11.jpg" alt="" width="70" height="50" /></td>
-                    <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-                    <td><font color="#00CC99">首页</font></td>
-                    <td>产品分类</td>
-                    <td>2016-07-01</td>
-                    <td><div class="button-group"> <a class="button border-main" href="add.jsp"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-                </tr>
-                <tr>
-                    <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-                        1</td>
-                    <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-                    <td width="10%"><img src="../images/11.jpg" alt="" width="70" height="50" /></td>
-                    <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-                    <td><font color="#00CC99">首页</font></td>
-                    <td>产品分类</td>
-                    <td>2016-07-01</td>
-                    <td><div class="button-group"> <a class="button border-main" href="add.jsp"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-                </tr>
-                <tr>
-                    <td style="text-align:left; padding:19px 0;padding-left:20px;"><input type="checkbox" id="checkall"/>
-                        全选 </td>
-                    <td colspan="7" style="text-align:left;padding-left:20px;"><a href="javascript:void(0)" class="button border-red icon-trash-o" style="padding:5px 15px;" onclick="DelSelect()"> 删除</a> <a href="javascript:void(0)" style="padding:5px 15px; margin:0 10px;" class="button border-blue icon-edit" onclick="sorts()"> 排序</a> 操作：
-                        <select name="ishome" style="padding:5px 15px; border:1px solid #ddd;" onchange="changeishome(this)">
-                            <option value="">首页</option>
-                            <option value="1">是</option>
-                            <option value="0">否</option>
-                        </select>
-                        <select name="isvouch" style="padding:5px 15px; border:1px solid #ddd;" onchange="changeisvouch(this)">
-                            <option value="">推荐</option>
-                            <option value="1">是</option>
-                            <option value="0">否</option>
-                        </select>
-                        <select name="istop" style="padding:5px 15px; border:1px solid #ddd;" onchange="changeistop(this)">
-                            <option value="">置顶</option>
-                            <option value="1">是</option>
-                            <option value="0">否</option>
-                        </select>
-                        &nbsp;&nbsp;&nbsp;
+            <tbody id="vo">
 
-                        移动到：
-                        <select name="movecid" style="padding:5px 15px; border:1px solid #ddd;" onchange="changecate(this)">
-                            <option value="">请选择分类</option>
-                            <option value="">产品分类</option>
-                            <option value="">产品分类</option>
-                            <option value="">产品分类</option>
-                            <option value="">产品分类</option>
-                        </select>
-                        <select name="copynum" style="padding:5px 15px; border:1px solid #ddd;" onchange="changecopy(this)">
-                            <option value="">请选择复制</option>
-                            <option value="5">复制5条</option>
-                            <option value="10">复制10条</option>
-                            <option value="15">复制15条</option>
-                            <option value="20">复制20条</option>
-                        </select></td>
-                </tr>
+            </tbody>
                 <tr>
-                    <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
+                    <%--<td colspan="8"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>--%>
+                    <td colspan="8"><div class="pagelist"><ul class="page" maxshowpageitem="5" pagelistcount="10"  id="page"></ul></div></td>
                 </tr>
-            </volist>
         </table>
     </div>
 </form>
@@ -166,11 +56,6 @@
         //加载查询列表
         guestRoomType();
         guestRoomStatus();
-        var GG = {
-            "kk":function(mm){
-                alert(mm);
-            }
-        }
     });
     
     //查询客房基础信息
@@ -179,7 +64,7 @@
         if(mm==""||mm==0||mm==null||mm==undefined){
             index = 0;
         }else{
-            index =mm;
+            index =mm-1;
         }
         $.ajax({
             url:"${pageContext.request.contextPath}/guestroom/queryGuestRoom.json",
@@ -188,12 +73,20 @@
             type:'post',
             success:function (data) {
                 if(data.status==true){
-                    $("#page").initPage(71,1,GG.kk);
+                   // $("#page").initPage(71,1,GG.kk);
+                    //渲染页面
+                    showRoomInfo(data.result.list);
+                    $("#page").initPage(data.result.totalNum,data.result.index,GG.kk);
                 }else{
-                    alert("0");
+                    alertError(data.msg);
                 }
             }
         });
+    }
+    var GG = {
+        "kk":function(mm){
+            queryGuestRoom(mm);
+        }
     }
     //加载房间类型
     function guestRoomType(){
@@ -221,6 +114,34 @@
             }
         });
     }
+    //数据渲染
+    function showRoomInfo(data){
+        $("#vo").append('');
+        if(data.length>0){
+            for(var i=0;i<data.length;i++){
+                var count = i+1;
+                $("#vo").append('<tr>' +
+                    '<td style="text-align:left; padding-left:20px;">' +
+                    '<input type="checkbox" name="id[]" value="" />'+count+'</td>' +
+                    '<td>'+data[i].roomNum+'</td>' +
+                    '<td>'+data[i].roomTypeText+'</td>' +
+                    '<td>'+data[i].floorNum+'</td>' +
+                    '<td>'+data[i].roomDevice+'</td>' +
+                    '<td>'+data[i].privice+'</td>' +
+                    '<td>'+data[i].warehouseName+'</td>' +
+                    '<td>'+data[i].roomArea+''+data[i].uint+'</td>' +
+                    '<td>'+data[i].roomDescribe+'</td>' +
+                    '<td><font color="#00CC99">'+data[i].statusText+'</font></td>' +
+                    '<td>'+data[i].createDate+'</td>' +
+                    '<td><div class="button-group"> <a class="button border-main" href="add.jsp"><span class="icon-edit"></span> 修改</a>' +
+                    '                               <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a>' +
+                    ' </div></td>' +
+                    '</tr>');
+            }
+
+        }
+    }
+
     //搜索
     function changesearch(){
 
@@ -389,6 +310,22 @@
             $(o).find("option:first").prop("selected","selected");
             return false;
         }
+    }
+    //警告弹框
+    function alertMsg(data){
+        var txt=  data;
+        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.warning);
+    }
+
+    //成功弹框
+    function alertSuccess(data) {
+        var txt=  data;
+        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.success);
+    }
+
+    function alertError(data) {
+        var txt=  data;
+        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
     }
 
 </script>

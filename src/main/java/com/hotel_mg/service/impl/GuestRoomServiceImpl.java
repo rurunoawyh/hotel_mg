@@ -57,7 +57,7 @@ public class GuestRoomServiceImpl implements GuestRoomService {
     public PageResult<GuestRoomVO> query(GuestRoomQuery guestRoomQuery) throws Exception {
         PageResult<GuestRoomDO> guestRoomDOPageResult = new PageResult<>();
         List<GuestRoomDO> guestRoomDOS = guestRoomDao.queryByQuery(guestRoomQuery);
-        guestRoomDOPageResult.setIndex(guestRoomDOPageResult.getIndex());
+        guestRoomDOPageResult.setIndex(guestRoomQuery.getIndex());
         guestRoomDOPageResult.setList(guestRoomDOS);
         guestRoomDOPageResult.setTotalNum(guestRoomDao.count(guestRoomQuery));
         guestRoomDOPageResult.setNum(guestRoomQuery.getNum());
@@ -90,7 +90,7 @@ public class GuestRoomServiceImpl implements GuestRoomService {
                 String devices = "";
                 for (Integer i : list) {
                     String desc = RoomDevice.valueof(i).getDesc();
-                    devices += desc + "";
+                    devices += desc + ",";
                 }
                 vo.setRoomDevice(devices);
             }

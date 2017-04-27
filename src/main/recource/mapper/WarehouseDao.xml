@@ -25,9 +25,9 @@
         select *
         from warehouse
         where warehouse_code in
-        <foreach collection="codes" item="warehouse_code" open="(" close=")"
+        <foreach collection="list" item="item" open="(" close=")"
                  separator=",">
-            #{code}
+            #{item}
         </foreach>
     </select>
 </mapper>

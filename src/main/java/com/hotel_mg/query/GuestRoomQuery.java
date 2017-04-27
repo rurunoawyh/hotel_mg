@@ -6,10 +6,6 @@ import com.hotel_mg.base.BaseQuery;
  * Created by wb-wyh270612 on 2017/4/21.
  */
 public class GuestRoomQuery extends BaseQuery{
-    /**
-     * 当前页
-     */
-    private Integer index;
 
     /**
      *房间类型
@@ -26,14 +22,6 @@ public class GuestRoomQuery extends BaseQuery{
      */
     private String roomNum;
 
-    @Override
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(Integer index) {
-        this.index = index;
-    }
 
     public Integer getRoomType() {
         return roomType;
