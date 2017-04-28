@@ -3,7 +3,7 @@
 
 <jsp:include page="head.jsp"></jsp:include>
 <div class="panel admin-panel">
-  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>添加客房</strong></div>
+  <div class="panel-head" id="add"><strong><span id="sp" class="icon-pencil-square-o">添加客房</span></strong></div>
   <div class="body-content">
     <form method="post" class="form-x" action="">
 
@@ -12,7 +12,7 @@
           <label>房间号：</label>
         </div>
         <div class="field">
-          <input id="roomNum" type="text" class="input w50" value="" name="roomNum" <%--data-validate="required:请输入房间号"--%> />
+          <input id="roomNum" type="text" class="input w50" value="${param.roomNum}" name="roomNum" <%--data-validate="required:请输入房间号"--%> />
           <div class="tips"></div>
         </div>
       </div>
@@ -129,9 +129,42 @@
 <script type="text/javascript">
     $(function(){
         //初始化状态
-        resetVal();
-        if ()
-        save();
+        if ($('#roomNum').val()!=null&&$('#roomNum').val()!=""){
+            queryByRoomNum();
+        }else{
+            resetVal();
+            save();
+        }
+
+        //渲染页面
+        function queryByRoomNum(){
+            $('#sp').html('');
+            $('#sp').html('修改客房');
+            $.ajax({
+                url:"${pageContext.request.contextPath}/guestroom/queryByRoomNum.json",
+                data:{"roomNum":$('#roomNum').val()},
+                dateType:"json",
+                success:function(data){
+                  if (data.status==true){
+                      resetVal();
+                      $('#roomNum').val(data.result.roomNum);
+                      var type=data.result.roomType;
+                      $("#roomTypeSelect option[value=type]").attr("selected", "selected");
+                      $("input[type='radio']").removeAttr('checked');
+                      $("#price").val(data.result.privice);
+                      var warehouse = data.result.warehouseCode;
+                      $("#warehouse option[value=warehouse]").attr("selected","selected");
+                      $("#roomArea").val(data.result.roomArea);
+                      var d = data.result.roomdevice;
+                      var devices= d.split(",");
+                      $("input[type='checkbox']").each(function(){
+                          if(devices.concat(this.val))
+                              this.checked=true;});
+                      $("#roomDescribe").val(data.result.roomDescrible);
+                   }
+                }
+        });
+        }
 
         //添加操作
         function save(){

@@ -24,7 +24,7 @@
                     <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()" > 搜索</a></li>
             </ul>
         </div>
-        <table class="table table-hover text-center">
+        <table class="table">
           <tr>
                 <th width="100" style="text-align:left; padding-left:20px;">序号</th>
                 <th>房号</th>
