@@ -111,13 +111,13 @@
 
     <sql id="doGuestRoomQueryParams">
            <if test="roomType!=null">
-            and room_type= #{roomType},
+            and room_type= #{roomType}
            </if>
            <if test="status!=null">
-            and status= #{status},
+            and status= #{status}
            </if>
            <if test="roomNum!=null">
-            AND   room_num= #{roomNum},
+            AND   room_num= #{roomNum}
            </if>
     </sql>
     <insert id="saveGuestRoomDO" parameterType="GuestRoomDO">
@@ -135,9 +135,7 @@
     </select>
 
     <select id="queryByQuery" resultMap="guestRoomDOMap" parameterType="com.hotel_mg.query.GuestRoomQuery">
-        select *
-        from guest_room
-        <where>
+        select * from guest_room <where>
         <include refid="doGuestRoomQueryParams"></include>
         </where>
          order by ${order} desc limit #{begin},#{num}
@@ -148,4 +146,12 @@
         <where> <include refid="doGuestRoomQueryParams"></include> </where>
     </select>
 
+    <update id="remove">
+        update guest_room
+         set status =-1
+        WHERE room_num IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

@@ -54,6 +54,11 @@ public class GuestRoomServiceImpl implements GuestRoomService {
     }
 
     @Override
+    public Integer removeByRoomNum(List<String> roomNum) {
+        return guestRoomDao.remove(roomNum);
+    }
+
+    @Override
     public PageResult<GuestRoomVO> query(GuestRoomQuery guestRoomQuery) throws Exception {
         PageResult<GuestRoomDO> guestRoomDOPageResult = new PageResult<>();
         List<GuestRoomDO> guestRoomDOS = guestRoomDao.queryByQuery(guestRoomQuery);

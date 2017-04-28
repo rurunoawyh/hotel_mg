@@ -24,10 +24,18 @@
     <select id="queryByCodes" resultMap="warehouseDOMap" >
         select *
         from warehouse
-        where warehouse_code in
+        where
+        <choose>
+        <when test="list!=null and list.size()>0">
+        warehouse_code in
         <foreach collection="list" item="item" open="(" close=")"
                  separator=",">
             #{item}
         </foreach>
+        </when>
+        <otherwise>
+            1=0
+        </otherwise>
+        </choose>
     </select>
 </mapper>

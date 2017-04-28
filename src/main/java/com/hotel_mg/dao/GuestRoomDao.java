@@ -16,4 +16,6 @@ public interface GuestRoomDao {
     List<GuestRoomDO> queryByQuery(GuestRoomQuery guestRoomQuery);
 
     Integer count(GuestRoomQuery guestRoomQuery);
+
+    Integer remove(List<String> roomNums);
 }

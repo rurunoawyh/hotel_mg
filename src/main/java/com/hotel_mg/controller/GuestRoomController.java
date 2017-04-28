@@ -4,6 +4,7 @@ import com.hotel_mg.base.BaseController;
 import com.hotel_mg.entity.GuestRoomDO;
 import com.hotel_mg.query.GuestRoomQuery;
 import com.hotel_mg.service.GuestRoomService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,11 +59,40 @@ public class GuestRoomController extends BaseController{
         checkParams(index);
         GuestRoomQuery guestRoomQuery = new GuestRoomQuery();
         guestRoomQuery.setIndex(index);
+        if(roomType!=null)
         guestRoomQuery.setRoomType(roomType);
+        if (StringUtils.isNotBlank(roomNum))
         guestRoomQuery.setRoomNum(roomNum);
+        if (status!=null)
         guestRoomQuery.setStatus(status);
         guestRoomQuery.setOrder("create_date");
              return success(guestRoomService.query(guestRoomQuery));
+        } catch (Exception e) {
+            return fail(e);
+        }
+    }
+
+    @RequestMapping("remove")
+    public @ResponseBody Object remove(@Param("roomNum")String roomNum){
+        try {
+            checkParams(roomNum);
+            Integer integer = guestRoomService.removeByRoomNum(Arrays.asList(roomNum));
+            if (integer!=0&&integer!=null)
+            return  success(integer);
+            return fail(new RuntimeException());
+        } catch (Exception e) {
+            return fail(e);
+        }
+    }
+
+    @RequestMapping("/queryByRoomNum")
+    public @ResponseBody Object queryByRoomNum(@Param("roomNum")String roomNum){
+        try {
+            checkParams(roomNum);
+            GuestRoomDO guestRoomDO = guestRoomService.queryByRoomNum(roomNum);
+            if (null==guestRoomDO)
+                return fail(null);
+            return success(guestRoomDO);
         } catch (Exception e) {
             return fail(e);
         }

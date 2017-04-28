@@ -9,18 +9,18 @@
                 <li> <a class="button border-main icon-plus-square-o" href="add.jsp"> 新增客房</a> </li>
                 <li>搜索：</li>
                 <li>客房类型
-                    <select name="roomType" id="roomType"  class="input" onchange="changesearch()" style="width:90px; line-height:17px; display:inline-block">
+                    <select name="roomType" id="roomType"  class="input"  style="width:90px; line-height:17px; display:inline-block">
                         <option value="">选择</option>
                     </select>
                     &nbsp;&nbsp;
                     客房状态
-                    <select name="roomStatus" id="roomStatus" class="input" onchange="changesearch()"  style="width:60px; line-height:17px;display:inline-block">
+                    <select name="roomStatus" id="roomStatus" class="input"   style="width:60px; line-height:17px;display:inline-block">
                         <option value="">选择</option>
                     </select>
                     &nbsp;&nbsp;
 
                 <li>
-                        房间号<input type="text" placeholder="请输入房间号" name="roomNum" class="input" style="width:250px; line-height:17px;display:inline-block" />
+                        房间号<input type="text" placeholder="请输入房间号" id="roomNum" name="roomNum" class="input" style="width:250px; line-height:17px;display:inline-block" />
                     <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()" > 搜索</a></li>
             </ul>
         </div>
@@ -68,7 +68,7 @@
         }
         $.ajax({
             url:"${pageContext.request.contextPath}/guestroom/queryGuestRoom.json",
-            data:{"index":index,"roomType":$('#roomType').children('option:selected').val(),"roomStatus":$('#roomstatus').children('option:selected').val(),"roomNum":$('#roomNum').val()},
+            data:{"index":index,"roomType":$('#roomType').children('option:selected').val(),"status":$('#roomStatus').children('option:selected').val(),"roomNum":$('#roomNum').val()},
             dataType:'json',
             type:'post',
             success:function (data) {
@@ -76,7 +76,7 @@
                    // $("#page").initPage(71,1,GG.kk);
                     //渲染页面
                     showRoomInfo(data.result.list);
-                    $("#page").initPage(data.result.totalNum,data.result.index,GG.kk);
+                    $("#page").initPage(data.result.totalNum,data.result.index+1,GG.kk);
                 }else{
                     alertError(data.msg);
                 }
@@ -116,7 +116,7 @@
     }
     //数据渲染
     function showRoomInfo(data){
-        $("#vo").append('');
+        $("#vo")    .empty();
         if(data.length>0){
             for(var i=0;i<data.length;i++){
                 var count = i+1;
@@ -133,8 +133,8 @@
                     '<td>'+data[i].roomDescribe+'</td>' +
                     '<td><font color="#00CC99">'+data[i].statusText+'</font></td>' +
                     '<td>'+data[i].createDate+'</td>' +
-                    '<td><div class="button-group"> <a class="button border-main" href="add.jsp"><span class="icon-edit"></span> 修改</a>' +
-                    '                               <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a>' +
+                    '<td><div class="button-group"> <a class="button border-main" href="add.jsp?roomNum='+data[i].roomNum+'"><span class="icon-edit"></span> 修改</a>' +
+                    '                               <a class="button border-red" href="javascript:void(0)" onclick="return del('+data[i].roomNum+')"><span class="icon-trash-o"></span> 删除</a>' +
                     ' </div></td>' +
                     '</tr>');
             }
@@ -144,13 +144,31 @@
 
     //搜索
     function changesearch(){
-
+        queryGuestRoom();
+    }
+    //删除
+    function remove(obj){
+        $.ajax({
+            url:'${pageContext.request.contextPath}/guestroom/remove.json',
+            data:{'roomNum':obj},
+            type:'post',
+            dataType:'json',
+            success:function (data) {
+               if (data==true){
+                   alertSuccess("删除成功！");
+                   location.href="guestRoom.jsp";
+               }
+               if(data==false){
+                   alertError(data.msg);
+               }
+            }
+        });
     }
 
     //单个删除
-    function del(id,mid,iscid){
+    function del(obj){
         if(confirm("您确定要删除吗?")){
-
+                  alert(obj);
         }
     }
 
@@ -180,7 +198,7 @@
             $("#listform").submit();
         }
         else{
-            alert("请选择您要删除的内容!");
+            alertMsg("请选择您要删除的内容!");
             return false;
         }
     }

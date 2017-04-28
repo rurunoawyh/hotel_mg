@@ -128,27 +128,34 @@
 </div>
 <script type="text/javascript">
     $(function(){
-        //检查房间号
-        $("#roomNum").blur(function(){checkRoomNum(this)});
-        //初始化房间类型
-        initRoomType();
-        $('#roomTypeSelect').change(function () {selectVal("请选择房间类型")});
-        //选择门店
-        initWarehouse();
-        $('#warehouse').change(function () {selectVal1("请选择门店")});
-        //验证price
-        $('#price').blur(function(){ validatePrice(this)});
-        //验证面积
-        $('#roomArea').blur(function () { validateArea(this)});
-        //验证描述
-        $('#roomDescribe').blur(function () {validateDescribe(this) });
-        //重置
-        $("#reset").click(function () {resetVal()});
-        //返回
-        $("#return").click(function () { location.href="list.jsp"});
-        //发送请求
-        $("#submit").click(function () {submit()});
+        //初始化状态
+        resetVal();
+        if ()
+        save();
 
+        //添加操作
+        function save(){
+            //检查房间号
+            $("#roomNum").blur(function(){checkRoomNum(this)});
+            //初始化房间类型
+            initRoomType();
+            $('#roomTypeSelect').change(function () {selectVal("请选择房间类型")});
+            //选择门店
+            initWarehouse();
+            $('#warehouse').change(function () {selectVal1("请选择门店")});
+            //验证price
+            $('#price').blur(function(){ validatePrice(this)});
+            //验证面积
+            $('#roomArea').blur(function () { validateArea(this)});
+            //验证描述
+            $('#roomDescribe').blur(function () {validateDescribe(this) });
+            //重置
+            $("#reset").click(function () {resetVal()});
+            //返回
+            $("#return").click(function () { location.href="list.jsp"});
+            //发送请求
+            $("#submit").click(function () {submit()});
+        }
 
         function checkRoomNum(obj){
             if($('#roomNum').val()==''||$('#roomNum').val()==null){
@@ -305,6 +312,7 @@
                 saveRoom();
             }
         }
+
 
         function saveRoom(){
             var roomDevices="";
