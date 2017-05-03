@@ -47,7 +47,7 @@
     </ul>
     <h2><span class="icon-pencil-square-o"></span>基础信息</h2>
     <ul style="display:block">
-        <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>客房信息</a></li>
+        <li><a href="guestRoom.jsp" target="right"><span class="icon-caret-right"></span>客房信息</a></li>
         <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>设备信息</a></li>
         <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>门店信息</a></li>
         <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>员工信息</a></li>

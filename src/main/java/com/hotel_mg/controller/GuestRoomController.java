@@ -110,4 +110,29 @@ public class GuestRoomController extends BaseController{
             return fail(e);
         }
     }
+
+    @RequestMapping("/update")
+    public @ResponseBody Object update(@Param("roomNum")String roomNum, @Param("roomType")Integer roomType, @Param("floorNum")Integer floorNum,
+                                       @Param("privice")Double privice, @Param("warehouseCode")String warehouseCode,
+                                       @Param("roomArea")Double roomArea, @Param("roomDescribe")String roomDescribe,
+                                       @Param("roomDevice")String [] roomDevice){
+        checkParams(roomNum);
+        try {
+            GuestRoomDO guestRoomDO;
+            guestRoomDO = new GuestRoomDO();
+            guestRoomDO.setWarehouseCode(warehouseCode);
+            String toS = SListToS(Arrays.asList(roomDevice));
+            guestRoomDO.setDevice(toS);
+            guestRoomDO.setFloorNum(floorNum);
+            guestRoomDO.setPrivice(privice);
+            guestRoomDO.setRoomArea(roomArea);
+            guestRoomDO.setRoomDescribe(roomDescribe);
+            guestRoomDO.setRoomNum(roomNum);
+            guestRoomDO.setRoomType(roomType);
+            Boolean update = guestRoomService.update(guestRoomDO);
+            return success(update);
+        } catch (Exception e) {
+            return fail(e);
+        }
+    }
 }

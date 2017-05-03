@@ -67,10 +67,19 @@ public class GuestRoomServiceImpl implements GuestRoomService {
         guestRoomDOPageResult.setTotalNum(guestRoomDao.count(guestRoomQuery));
         guestRoomDOPageResult.setNum(guestRoomQuery.getNum());
         ArrayList<String> codes = Lists.newArrayList();
+        final Map<String,String> idName = Maps.newHashMap();
         for (GuestRoomDO guestRoomDO:guestRoomDOS){
             codes.add(guestRoomDO.getWarehouseCode());
+            List<Integer> list = CommonUtils.stringToList(guestRoomDO.getDevice(), Integer.class);
+            String d = "";
+            for (Integer i : list) {
+                String desc = RoomDevice.valueof(i).getDesc();
+                d += desc + ",";
+            }
+            idName.put(guestRoomDO.getId(),d);
         }
         final Map<String, String> nameCode = getNameCode(codes);
+
         PageResult<GuestRoomVO> rvs = CommonUtils.dbToVo(guestRoomDOPageResult, GuestRoomVO.class, new CallBack<GuestRoomDO, GuestRoomVO>() {
             @Override
             public void execute(GuestRoomDO db, GuestRoomVO vo) {
@@ -89,19 +98,20 @@ public class GuestRoomServiceImpl implements GuestRoomService {
                 if (!nameCode.isEmpty() && nameCode != null)
                     vo.setWarehouseName(db.getWarehouseCode() != null ? nameCode.get(db.getWarehouseCode()) : "");
                 vo.setRoomDescribe(db.getRoomDescribe());
-                String device = db.getDevice();
-                List<Integer> list = CommonUtils.stringToList(device, Integer.class);
-                //ArrayList<String> devices = Lists.newArrayList();
-                String devices = "";
-                for (Integer i : list) {
-                    String desc = RoomDevice.valueof(i).getDesc();
-                    devices += desc + ",";
-                }
-                vo.setRoomDevice(devices);
+                if (!idName.isEmpty() && idName != null)
+                    vo.setRoomDevice(db.getId() != null ? idName.get(db.getId()) : "");
             }
         });
 
         return rvs;
+    }
+
+    @Override
+    public Boolean update(GuestRoomDO guestRoomDO) {
+        Integer integer = guestRoomDao.update(guestRoomDO);
+        if (integer!=null||integer==0)
+            return false;
+        return true;
     }
 
     private Map<String,String> getNameCode(List<String> codes){

@@ -18,4 +18,6 @@ public interface GuestRoomDao {
     Integer count(GuestRoomQuery guestRoomQuery);
 
     Integer remove(List<String> roomNums);
+
+    Integer update(GuestRoomDO guestRoomDO);
 }

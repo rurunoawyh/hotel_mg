@@ -37,4 +37,11 @@ public interface GuestRoomService {
      */
 
     PageResult<GuestRoomVO> query(GuestRoomQuery guestRoomQuery) throws Exception;
+
+    /**
+     * 修改客房信息
+     * @param guestRoomDO
+     * @return
+     */
+    Boolean update(GuestRoomDO guestRoomDO);
 }

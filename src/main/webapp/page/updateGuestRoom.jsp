@@ -118,7 +118,7 @@
           <label></label>
         </div>
         <div class="field">
-          <button class="button bg-main icon-check-square-o" id="submit" type="button"> 提交</button>
+          <button class="button bg-main icon-check-square-o" id="modify" type="button"> 提交</button>
           <button class="button bg-main icon-ban-circle" id="reset" type="button"> 重置</button>
           <button class="button bg-main icon-reply" id="return" type="button"> 返回</button>
         </div>
@@ -131,13 +131,7 @@
         initRoomType();
         initWarehouse();
         //初始化状态
-        if ($('#roomNum').val()!=null&&$('#roomNum').val()!=""){
-            queryByRoomNum();
-            save();
-        }else{
-            resetVal();
-            save();
-        }
+       queryByRoomNum();
 
         //渲染页面
         function queryByRoomNum(){
@@ -186,7 +180,7 @@
             //返回
             $("#return").click(function () { location.href="guestRoom.jsp"});
             //发送请求
-            $("#submit").click(function () { submit()});
+            $("#modify").click(function () {alert("0"); submit()});
         }
 
         function checkRoomNum(obj){
@@ -352,13 +346,8 @@
                     roomDevices +="roomDevice"+":"+ $(this).attr('value')+',';
                 }});
             var url;
-            if($('#sp').html()=="修改客房"){
-                url="${pageContext.request.contextPath}/guestroom/update.json";
-            }else{
-                url="${pageContext.request.contextPath}/guestroom/save.json";
-            }
             $.ajax({
-                url:url,
+                url:"${pageContext.request.contextPath}/guestroom/update.json",
                 type: "post",
                 data: $("form").serialize(),
                 dataType:"json",
