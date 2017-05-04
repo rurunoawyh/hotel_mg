@@ -14,7 +14,7 @@
     </resultMap>
 
     <sql id="doWarehouseQueryParams">
-        <if test="warehouseCode!=null">
+        <if test="warehouseCode!=null and warehouseCode!=''">
             and warehouse_Code= #{warehouseCode}
         </if>
         <if test="status!=null">
@@ -30,10 +30,10 @@
             and score= #{score}
         </if>
         <if test="createBeginDate!=null and createBeginDate!=''">
-            AND create_data &gt;= #{createBeginDate}
+            AND create_date &gt;= #{createBeginDate}
         </if>
         <if test="createEndData!=null and createEndData!=''">
-            AND create_data &lt;= #{createEndData}
+            AND create_date &lt;= #{createEndDate}
         </if>
     </sql>
 

@@ -47,6 +47,7 @@ public class WarehouseServiceImpl implements WarehouseService {
             @Override
             public void execute(WarehouseDO db, WarehouseVO vo) {
                  vo.setWarehouseMg(db.getUserId());
+                 vo.setCreateData(db.getCreateDate());
             }
         });
         return voPageResult;

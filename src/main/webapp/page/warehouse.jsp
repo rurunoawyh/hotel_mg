@@ -6,9 +6,9 @@
         <div class="panel-head"><strong class="icon-reorder"> 门店信息</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
         <div class="padding border-bottom">
             <ul class="search" style="padding-left:10px;">
-                <li> <a class="button border-main icon-plus-square-o" href="add.jsp"> 开设门店</a> </li>
+                <li> <a class="button border-main icon-plus-square-o" href="addWarehouse.jsp"> 开设门店</a> </li>
                 <li>搜索：</li>
-                <li>门店编码<input type="text" placeholder="请输入编码" id="warehouseNum" name="warehouseNum" class="input" style="width:100px; line-height:17px;display:inline-block" /></li>
+                <li>门店编码<input type="text" placeholder="请输入编码" id="warehouseCode" name="warehouseCode" class="input" style="width:100px; line-height:17px;display:inline-block" /></li>
                 <li>门店名称<input type="text" placeholder="请输入门店名" id="warehouseName" name="warehouseName" class="input" style="width:105px; line-height:17px;display:inline-block" /></li>
                 <li>星级<select name="score" id="score"  class="input"  style="width:60px; line-height:17px; display:inline-block">
                     <option value="">选择</option>
@@ -75,7 +75,7 @@
         }
         $.ajax({
             url:"${pageContext.request.contextPath}/warehouse/queryWarehouse.json",
-            data:{"index":index,"roomType":$('#roomType').children('option:selected').val(),"status":$('#roomStatus').children('option:selected').val(),"roomNum":$('#roomNum').val()},
+            data:{"index":index,"warehouseCode":$('#warehouseCode').val(),"warehouseName":$('#warehouseName').val(),"score":$('#score').children('option:selected').val(),"createBeginDate":$("#txtBeginDate").val(),"createEndDate":$("#txtBeginDate").val()},
             dataType:'json',
             type:'post',
             success:function (data) {
@@ -108,7 +108,7 @@
                         '<td>' + data[i].warehouseName + '</td>' +
                         '<td>' + data[i].address + '</td>' +
                         '<td>' + data[i].warehouseMg + '</td>' +
-                        '<td>' + data[i].privice + '</td>' +
+                        '<td>' + data[i].score + '</td>' +
                         '<td>' + data[i].tel + '</td>' +
                         '<td>' + data[i].createData + '</td>' +
                         '<td><div class="button-group"> <a class="button border-main" href="add.jsp?roomNum=' + data[i].roomNum + '"><span class="icon-edit"></span> 修改</a>' +
@@ -121,7 +121,7 @@
 
     //搜索
     function changesearch(){
-        queryGuestRoom();
+        queryWarehouse();
     }
     //删除
     function remove(obj){

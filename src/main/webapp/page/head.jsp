@@ -20,9 +20,13 @@
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" type="text/css" href="../css/xcConfirm.css"/>
     <link rel="stylesheet" href="../css/lyz.calendar.css">
+    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
     <script src="../js/jquery.js"></script>
     <script src="../js/pintuer.js"></script>
     <script src="../js/page.js"></script>
+    <script src="../js/distpicker.data.js"></script>
+    <script src="../js/distpicker.js"></script>
+    <script src="../js/main.js"></script>
     <script src="../js/lyz.calendar.min.js"></script>
     <script src="../js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
