@@ -19,9 +19,11 @@
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" type="text/css" href="../css/xcConfirm.css"/>
+    <link rel="stylesheet" href="../css/lyz.calendar.css">
     <script src="../js/jquery.js"></script>
     <script src="../js/pintuer.js"></script>
     <script src="../js/page.js"></script>
+    <script src="../js/lyz.calendar.min.js"></script>
     <script src="../js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         $(function () {

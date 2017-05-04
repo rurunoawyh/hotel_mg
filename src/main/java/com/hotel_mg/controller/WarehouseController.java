@@ -1,6 +1,7 @@
 package com.hotel_mg.controller;
 
 import com.hotel_mg.base.BaseController;
+import com.hotel_mg.query.WarehouseQuery;
 import com.hotel_mg.service.WarehouseService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,19 @@ public class WarehouseController extends BaseController {
         } catch (Exception e) {
             return fail(e);
         }
-
     }
+
+    @RequestMapping("/queryWarehouse")
+    public @ResponseBody Object query(@Param("index")Integer index){
+        try {
+            checkParams(index);
+            WarehouseQuery warehouseQuery = new WarehouseQuery();
+            warehouseQuery.setIndex(index);
+            warehouseQuery.setOrder("create_date");
+            return success(warehouseService.query(warehouseQuery));
+        } catch (Exception e) {
+            return fail(e);
+        }
+    }
+
 }

@@ -13,6 +13,30 @@
         <result property="tel" column="tel" />
     </resultMap>
 
+    <sql id="doWarehouseQueryParams">
+        <if test="warehouseCode!=null">
+            and warehouse_Code= #{warehouseCode}
+        </if>
+        <if test="status!=null">
+            and status= #{status}
+        </if>
+        <if test="warehouseName!=null">
+            AND   warehouse_name like CONCAT('%', '${warehouseName}', '%')
+        </if>
+        <if test="address!=null">
+            and address= #{address}
+        </if>
+        <if test="score!=null">
+            and score= #{score}
+        </if>
+        <if test="createBeginDate!=null and createBeginDate!=''">
+            AND create_data &gt;= #{createBeginDate}
+        </if>
+        <if test="createEndData!=null and createEndData!=''">
+            AND create_data &lt;= #{createEndData}
+        </if>
+    </sql>
+
     <select id="queryByName" resultMap="warehouseDOMap">
         select *
         from warehouse
@@ -37,5 +61,18 @@
             1=0
         </otherwise>
         </choose>
+    </select>
+
+    <select id="query" resultMap="warehouseDOMap" parameterType="com.hotel_mg.query.WarehouseQuery">
+        select *
+        from warehouse<where>
+        <include refid="doWarehouseQueryParams"></include>
+    </where>
+        order by ${order} desc limit #{begin},#{num}
+    </select>
+
+    <select id="count"  resultType="java.lang.Integer" parameterType="com.hotel_mg.query.WarehouseQuery">
+        select count(1)        from warehouse
+        <where> <include refid="doWarehouseQueryParams"></include> </where>
     </select>
 </mapper>

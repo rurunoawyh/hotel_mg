@@ -3,39 +3,35 @@
 <jsp:include page="head.jsp"></jsp:include>
 <form method="post" action="" id="listform">
     <div class="panel admin-panel">
-        <div class="panel-head"><strong class="icon-reorder"> 客房信息</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
+        <div class="panel-head"><strong class="icon-reorder"> 门店信息</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
         <div class="padding border-bottom">
             <ul class="search" style="padding-left:10px;">
-                <li> <a class="button border-main icon-plus-square-o" href="add.jsp"> 新增客房</a> </li>
+                <li> <a class="button border-main icon-plus-square-o" href="add.jsp"> 开设门店</a> </li>
                 <li>搜索：</li>
-                <li>客房类型
-                    <select name="roomType" id="roomType"  class="input"  style="width:90px; line-height:17px; display:inline-block">
-                        <option value="">选择</option>
-                    </select>
-                    &nbsp;&nbsp;
-                    客房状态
-                    <select name="roomStatus" id="roomStatus" class="input"   style="width:60px; line-height:17px;display:inline-block">
-                        <option value="">选择</option>
-                    </select>
-                    &nbsp;&nbsp;
-
-                <li>
-                        房间号<input type="text" placeholder="请输入房间号" id="roomNum" name="roomNum" class="input" style="width:250px; line-height:17px;display:inline-block" />
-                    <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()" > 搜索</a></li>
+                <li>门店编码<input type="text" placeholder="请输入编码" id="warehouseNum" name="warehouseNum" class="input" style="width:100px; line-height:17px;display:inline-block" /></li>
+                <li>门店名称<input type="text" placeholder="请输入门店名" id="warehouseName" name="warehouseName" class="input" style="width:105px; line-height:17px;display:inline-block" /></li>
+                <li>星级<select name="score" id="score"  class="input"  style="width:60px; line-height:17px; display:inline-block">
+                    <option value="">选择</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select></li>
+                <li>日期 <input id="txtBeginDate" name="createBeginDate" style="width:100px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
+                    <input id="txtEndDate" name="createEndDate" style="width:100px;padding:7px 10px;border:1px solid #ccc;" /></li>
+                <li><a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()" > 搜索</a></li>
             </ul>
         </div>
         <table class="table">
           <tr>
                 <th width="100" style="text-align:left; padding-left:20px;">序号</th>
-                <th>房号</th>
-                <th>房类型</th>
-                <th>楼层</th>
-                <th>设备</th>
-                <th>价格</th>
-                <th>门店</th>
-                <th>面积</th>
-                <th>描述</th>
-                <th>状态</th>
+                <th>门店编码</th>
+                <th>门店名称</th>
+                <th>地址</th>
+                <th>负责人</th>
+                <th>星级</th>
+                <th>电话</th>
                 <th width="10%">创建时间</th>
                 <th width="310">操作</th>
             </tr>
@@ -52,14 +48,25 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-        queryGuestRoom();
+        queryWarehouse();
         //加载查询列表
-        guestRoomType();
-        guestRoomStatus();
+       // guestRoomType();
+       // guestRoomStatus();
+        $("#txtBeginDate").calendar({
+            controlId: "divDate",                                 // 弹出的日期控件ID，默认: $(this).attr("id") + "Calendar"
+            speed: 200,                                           // 三种预定速度之一的字符串("slow", "normal", or "fast")或表示动画时长的毫秒数值(如：1000),默认：200
+            complement: true,                                     // 是否显示日期或年空白处的前后月的补充,默认：true
+            readonly: true,                                       // 目标对象是否设为只读，默认：true
+            upperLimit: new Date(),                               // 日期上限，默认：NaN(不限制)
+            lowerLimit: new Date("2011/01/01"),                   // 日期下限，默认：NaN(不限制)
+            callback: function () {                               // 点击选择日期后的回调函数
+            }
+        });
+        $("#txtEndDate").calendar();
     });
-    
-    //查询客房基础信息
-    function queryGuestRoom(mm) {
+
+    //查询门店基础信息
+    function queryWarehouse(mm) {
         var index;
         if(mm==""||mm==0||mm==null||mm==undefined){
             index = 0;
@@ -67,7 +74,7 @@
             index =mm-1;
         }
         $.ajax({
-            url:"${pageContext.request.contextPath}/guestroom/queryGuestRoom.json",
+            url:"${pageContext.request.contextPath}/warehouse/queryWarehouse.json",
             data:{"index":index,"roomType":$('#roomType').children('option:selected').val(),"status":$('#roomStatus').children('option:selected').val(),"roomNum":$('#roomNum').val()},
             dataType:'json',
             type:'post',
@@ -88,76 +95,26 @@
             queryGuestRoom(mm);
         }
     }
-    //加载房间类型
-    function guestRoomType(){
-        $.ajax({
-            url:'${pageContext.request.contextPath}/enum/roomTypeEnum.json',
-            dataType:'json',
-            type:'post',
-            success:function (data) {
-                for (var opt=0; opt<data.length;opt++){
-                    $('#roomType').append("<option value='"+data[opt].key+"'>"+data[opt].value+"</option>");
-                }
-            }
-        });
-    }
-    //加载房间状态
-    function guestRoomStatus(){
-        $.ajax({
-            url:'${pageContext.request.contextPath}/enum/roomStatusEnum.json',
-            dataType:'json',
-            type:'post',
-            success:function (data) {
-                for (var opt=0; opt<data.length;opt++){
-                    $('#roomStatus').append("<option value='"+data[opt].key+"'>"+data[opt].value+"</option>");
-                }
-            }
-        });
-    }
     //数据渲染
     function showRoomInfo(data){
-        $("#vo")    .empty();
+        $("#vo").empty();
         if(data.length>0){
             for(var i=0;i<data.length;i++) {
                 var count = i + 1;
-                if (data[i].status == -1) {
                     $("#vo").append('<tr>' +
                         '<td style="text-align:left; padding-left:20px;">' +
                         '<input type="checkbox" name="id[]" value="" />' + count + '</td>' +
-                        '<td>' + data[i].roomNum + '</td>' +
-                        '<td>' + data[i].roomTypeText + '</td>' +
-                        '<td>' + data[i].floorNum + '</td>' +
-                        '<td>' + data[i].roomDevice + '</td>' +
-                        '<td>' + data[i].privice + '</td>' +
+                        '<td>' + data[i].warehouseCode + '</td>' +
                         '<td>' + data[i].warehouseName + '</td>' +
-                        '<td>' + data[i].roomArea + '' + data[i].uint + '</td>' +
-                        '<td>' + data[i].roomDescribe + '</td>' +
-                        '<td><font color="red">' + data[i].statusText + '</font></td>' +
-                        '<td>' + data[i].createDate + '</td>' +
+                        '<td>' + data[i].address + '</td>' +
+                        '<td>' + data[i].warehouseMg + '</td>' +
+                        '<td>' + data[i].privice + '</td>' +
+                        '<td>' + data[i].tel + '</td>' +
+                        '<td>' + data[i].createData + '</td>' +
                         '<td><div class="button-group"> <a class="button border-main" href="add.jsp?roomNum=' + data[i].roomNum + '"><span class="icon-edit"></span> 修改</a>' +
                         '                               <a class="button border-red" href="javascript:void(0)" onclick="return del(' +data[i].status+','+ data[i].roomNum + ')"><span class="icon-trash-o"></span> 删除</a>' +
                         ' </div></td>' +
                         '</tr>');
-
-                } else if(data[i].status != -1) {
-                    $("#vo").append('<tr>' +
-                        '<td style="text-align:left; padding-left:20px;">' +
-                        '<input type="checkbox" name="id[]" value="" />' + count + '</td>' +
-                        '<td>' + data[i].roomNum + '</td>' +
-                        '<td>' + data[i].roomTypeText + '</td>' +
-                        '<td>' + data[i].floorNum + '</td>' +
-                        '<td>' + data[i].roomDevice + '</td>' +
-                        '<td>' + data[i].privice + '</td>' +
-                        '<td>' + data[i].warehouseName + '</td>' +
-                        '<td>' + data[i].roomArea + '' + data[i].uint + '</td>' +
-                        '<td>' + data[i].roomDescribe + '</td>' +
-                        '<td><font color="#00CC99">' + data[i].statusText + '</font></td>' +
-                        '<td>' + data[i].createDate + '</td>' +
-                        '<td><div class="button-group"> <a class="button border-main" href="add.jsp?roomNum=' + data[i].roomNum + '"><span class="icon-edit"></span> 修改</a>' +
-                        '                               <a class="button border-red" href="javascript:void(0)" onclick="return del(' +data[i].status+','+data[i].roomNum + ')"><span class="icon-trash-o"></span> 删除</a>' +
-                        ' </div></td>' +
-                        '</tr>');
-                }
             }
         }
     }

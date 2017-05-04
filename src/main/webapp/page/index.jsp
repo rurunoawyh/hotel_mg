@@ -27,7 +27,6 @@
         <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>预定</a></li>
         <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>入住</a></li>
         <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>结算</a></li>
-        <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>网站设置</a></li>
         <li><a href="pass.jsp" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
         <li><a href="page.jsp" target="right"><span class="icon-caret-right"></span>单页管理</a></li>
         <li><a href="adv.jsp" target="right"><span class="icon-caret-right"></span>首页轮播</a></li>
@@ -38,22 +37,13 @@
     <ul style="display:block">
         <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>散客</a></li>
         <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>会员</a></li>
-        <li><a href="info.jsp" target="right"><span class="icon-caret-right"></span>网站设置</a></li>
-        <li><a href="pass.jsp" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
-        <li><a href="page.jsp" target="right"><span class="icon-caret-right"></span>单页管理</a></li>
-        <li><a href="adv.jsp" target="right"><span class="icon-caret-right"></span>首页轮播</a></li>
-        <li><a href="book.jsp" target="right"><span class="icon-caret-right"></span>留言管理</a></li>
-        <li><a href="column.jsp" target="right"><span class="icon-caret-right"></span>栏目管理</a></li>
     </ul>
     <h2><span class="icon-pencil-square-o"></span>基础信息</h2>
     <ul style="display:block">
         <li><a href="guestRoom.jsp" target="right"><span class="icon-caret-right"></span>客房信息</a></li>
         <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>设备信息</a></li>
-        <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>门店信息</a></li>
+        <li><a href="warehouse.jsp" target="right"><span class="icon-caret-right"></span>门店信息</a></li>
         <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>员工信息</a></li>
-        <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>内容管理</a></li>
-        <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>内容管理</a></li>
-        <li><a href="add.jsp" target="right"><span class="icon-caret-right"></span>添加内容</a></li>
         <li><a href="cate.jsp" target="right"><span class="icon-caret-right"></span>分类管理</a></li>
     </ul>
     <h2><span class="icon-table"></span>报表</h2>
