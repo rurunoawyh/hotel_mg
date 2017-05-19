@@ -83,6 +83,7 @@
             }
         });
     }
+
     var GG = {
         "kk":function(mm){
             queryGuestRoom(mm);
@@ -135,7 +136,7 @@
                         '<td><font color="red">' + data[i].statusText + '</font></td>' +
                         '<td>' + data[i].createDate + '</td>' +
                         '<td><div class="button-group"> <a class="button border-main" href="add.jsp?roomNum=' + data[i].roomNum + '"><span class="icon-edit"></span> 修改</a>' +
-                        '                               <a class="button border-red" href="javascript:void(0)" onclick="return del(' +data[i].status+','+ data[i].roomNum + ')"><span class="icon-trash-o"></span> 删除</a>' +
+                        '                               <a class="button border-red" href="javascript:void(0)" onclick="return del(' +data[i].status+','+ data[i].roomNum + ')"><span class="icon-trash-o"></span> 停用</a>' +
                         ' </div></td>' +
                         '</tr>');
 
@@ -154,7 +155,7 @@
                         '<td><font color="#00CC99">' + data[i].statusText + '</font></td>' +
                         '<td>' + data[i].createDate + '</td>' +
                         '<td><div class="button-group"> <a class="button border-main" href="add.jsp?roomNum=' + data[i].roomNum + '"><span class="icon-edit"></span> 修改</a>' +
-                        '                               <a class="button border-red" href="javascript:void(0)" onclick="return del(' +data[i].status+','+data[i].roomNum + ')"><span class="icon-trash-o"></span> 删除</a>' +
+                        '                               <a class="button border-red" href="javascript:void(0)" onclick="del(' +data[i].status+','+data[i].roomNum + ')"><span class="icon-trash-o"></span> 删除</a>' +
                         ' </div></td>' +
                         '</tr>');
                 }
@@ -174,7 +175,7 @@
             type:'post',
             dataType:'json',
             success:function (data) {
-               if (data==true){
+               if (data.status==true){
                    alertSuccess("删除成功！");
                    location.href="guestRoom.jsp";
                }
@@ -187,11 +188,11 @@
 
     //单个删除
     function del(status,roomNum){
-        if(status=-1){
+        if(status==-1){
             alertMsg("该房间已经停用！");
             return;
         }
-        if(confirm("您确定要删除吗?")){
+        else if(confirm("您确定要删除吗?")){
             remove(roomNum);
         }
     }

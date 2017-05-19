@@ -167,16 +167,7 @@
             $("#warehouseName").blur(function(){checkWarehouseName(this)});
             //检查街道
             $("#address").blur(function(){checkAddress(this)});
-            //初始化房间类型
-            $('#roomTypeSelect').change(function () {selectVal("请选择房间类型")});
-            //选择门店
-            $('#warehouse').change(function () {selectVal1("请选择门店")});
-            //验证price
-            $('#price').blur(function(){ validatePrice(this)});
-            //验证面积
-            $('#roomArea').blur(function () { validateArea(this)});
-            //验证描述
-            $('#roomDescribe').blur(function () {validateDescribe(this) });
+
             //重置
             $("#reset").click(function () {resetVal()});
             //返回
@@ -205,7 +196,7 @@
                 return true;
             }
         }
-        function checkWarehouseName(obj){
+        function checkAddress(obj){
             if($('#address').val()==''||$('#address').val()==null){
                 addValidate(obj,"请输详细街道");
                 $('#address').focus();
@@ -285,17 +276,7 @@
                 return true;
             }
         }
-        //验证下拉框是否有值
-        function selectVal(msg){
-            if($('#roomTypeSelect').children('option:selected').val()==''||$('#roomTypeSelect').children('option:selected').val()==null){
-                removeValidate($('#roomTypeSelect'),"");
-                addValidate($('#roomTypeSelect'),msg);
-                return false;
-            }else{
-                removeValidate($('#roomTypeSelect'),"");
-                return true;
-            }
-        }
+
         function selectVal1(msg){
             if($('#warehouse').children('option:selected').val()==''||$('#warehouse').children('option:selected').val()==null){
                 removeValidate($('#warehouse'),"");
@@ -307,16 +288,7 @@
             }
         }
 
-        //验证radio是否有值
-        function radioVal(){
-            var val=$('input:radio[name="floorNum"]:checked').val();
-            if(val==null||val==''){
-                alertMsg("请选择楼层");
-                return false;
-            }else{
-                return true;
-            }
-        }
+
 
         //重置
         function resetVal(){

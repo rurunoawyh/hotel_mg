@@ -9,10 +9,12 @@ import com.hotel_mg.query.WarehouseQuery;
 import com.hotel_mg.service.WarehouseService;
 import com.hotel_mg.util.CommonUtils;
 import com.hotel_mg.util.CommonUtils.CallBack;
+import com.hotel_mg.util.MD5Utils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,5 +53,25 @@ public class WarehouseServiceImpl implements WarehouseService {
             }
         });
         return voPageResult;
+    }
+
+    @Override
+    public Boolean saveWarehouse(WarehouseDO warehouseDO) {
+        String uuid = MD5Utils.getUUID();
+        warehouseDO.setId(uuid);
+        warehouseDO.setCreateDate(new Date());
+        warehouseDO.setStatus(1);
+        Integer integer = warehouseDao.saveWarehouseDO(warehouseDO);
+        if (integer==null)
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean updateWarehouse(String warehouseCode) {
+        Integer integer = warehouseDao.updateWarehouse(warehouseCode);
+        if (integer==null)
+            return false;
+        return true;
     }
 }

@@ -75,4 +75,15 @@
         select count(1)        from warehouse
         <where> <include refid="doWarehouseQueryParams"></include> </where>
     </select>
+
+    <insert id="saveGuestRoomDO" parameterType="GuestRoomDO">
+        insert into guest_room(id,warehouse_name,warehouse_code,address,warehouse_mg,create_date,status,score,tel)
+        values(#{id},#{wahouseName},#{warehouseCode},#{address},#{warehouseMg},#{createDate},#{status},#{score},#{tel})
+    </insert>
+
+    <update id="updateWarehouse">
+        update warehouse set status = -1 where <if test="warehouseCode!=null">
+        warehouse_code=#{warehouseCode}
+    </if><if test="warehouseCode==null">1=0</if>
+    </update>
 </mapper>

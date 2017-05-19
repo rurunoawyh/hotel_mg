@@ -111,8 +111,7 @@
                         '<td>' + data[i].score + '</td>' +
                         '<td>' + data[i].tel + '</td>' +
                         '<td>' + data[i].createData + '</td>' +
-                        '<td><div class="button-group"> <a class="button border-main" href="add.jsp?roomNum=' + data[i].roomNum + '"><span class="icon-edit"></span> 修改</a>' +
-                        '                               <a class="button border-red" href="javascript:void(0)" onclick="return del(' +data[i].status+','+ data[i].roomNum + ')"><span class="icon-trash-o"></span> 删除</a>' +
+                        '<td><div class="button-group"><a class="button border-red" href="javascript:void(0)" onclick="return del(' +data[i].status+','+ data[i].roomNum + ')"><span class="icon-trash-o"></span> 关闭</a>' +
                         ' </div></td>' +
                         '</tr>');
             }

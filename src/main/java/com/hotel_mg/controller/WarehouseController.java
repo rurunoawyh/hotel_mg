@@ -1,6 +1,7 @@
 package com.hotel_mg.controller;
 
 import com.hotel_mg.base.BaseController;
+import com.hotel_mg.entity.WarehouseDO;
 import com.hotel_mg.query.WarehouseQuery;
 import com.hotel_mg.service.WarehouseService;
 import com.hotel_mg.util.DateUtils;
@@ -50,4 +51,33 @@ public class WarehouseController extends BaseController {
         }
     }
 
-}
+    @RequestMapping("/saveWarehouse")
+    public @ResponseBody Object saveWarehouse(@Param("warehouseName")String warehouseName,@Param("warehouseCode")String warehouseCode,@Param("address")String address,
+                                              @Param("wrehouseMg")String warehouseMg,@Param("score")Double score,@Param("tel")String tel) {
+        try {
+            checkParams(warehouseCode, warehouseMg, warehouseName, score, tel, address);
+            WarehouseDO warehouseDO = new WarehouseDO();
+            warehouseDO.setAddress(address);
+            warehouseDO.setScore(score);
+            warehouseDO.setTel(tel);
+            warehouseDO.setWarehouseName(warehouseName);
+            warehouseDO.setWarehouseCode(warehouseCode);
+            warehouseDO.setUserId(warehouseMg);
+            Boolean aBoolean = warehouseService.saveWarehouse(warehouseDO);
+            return success(aBoolean);
+        } catch (Exception e) {
+            return fail(e);
+        }
+    }
+     @RequestMapping("/removeWarehouse")
+     public @ResponseBody Object removeWarehouse(@Param("wahouseCode")String warehouseCode){
+         try {
+             checkParams(warehouseCode);
+             return success(warehouseService.updateWarehouse(warehouseCode));
+         } catch (Exception e) {
+             return fail(e);
+         }
+     }
+    }
+
+

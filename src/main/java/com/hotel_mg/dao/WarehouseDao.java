@@ -17,4 +17,8 @@ public interface WarehouseDao {
     List<WarehouseDO> query(WarehouseQuery warehouseQuery);
 
     Integer count(WarehouseQuery warehouseQuery);
+
+    Integer saveWarehouseDO(WarehouseDO warehouseDO);
+
+    Integer updateWarehouse(String warehouseCode);
 }
